@@ -6,26 +6,22 @@ Live: https://godde3s.github.io/
 
 ## About
 
-A single-page portfolio built with plain HTML, CSS and vanilla JavaScript — no frameworks, no build step. The layout and interaction model are inspired by modern developer-platform landing pages (fenrir.lio.id in particular): big centered hero, "in numbers" band, laptop story slider, roman-numeral use cases, FAQ accordion and a Light / Dark / System theme switcher. All code, copy and the wolf mascot artwork are original.
+A deliberately simple, single-page portfolio built with plain HTML, CSS and vanilla JavaScript — no frameworks, no build step. The visual language is inspired by [fenrir.lio.id](https://fenrir.lio.id): cream paper background, editorial serif display type, hairline dividers, a red accent and a "Pause motion" accessibility control. The line-art wolf is the Fenrir-inspired mascot of the site.
 
 ## Sections
 
-- Hero — résumé / agents view switch + summary card + wolf mascot with pause-motion control
-- Portfolio in numbers — animated count-up stats
-- Project stories — MacBook slider (ported from the Usf portfolio, touch swipe enabled)
-- Selected projects — every card links to a working public repository
-- Skills toolbox
-- Agentic coding stack (OpenCode, Codex, Claude Code, Hermes)
-- What you can build — six threads with roman numerals
+- Hero — open-to-work tag, serif headline, wolf mascot with pause-motion control
+- In numbers — stats band (repos, projects, languages)
+- Selected work — 14 editorial rows, each linking to a public repository
+- Project stories — MacBook slider (kept from the previous design, touch swipe enabled)
+- The toolbox — 12 skills including UI/UX design
 - How it works — three steps
-- FAQ
-- Contact CTA
-- Footer with theme options
+- Footer — CTA, link columns and a giant wordmark
 
 ## Stack
 
-- HTML5 + CSS3 (custom properties, themeable tokens, grid, responsive)
-- Vanilla JS (theme system, motion toggle, menu, scroll reveal, count-up, laptop slider)
+- HTML5 + CSS3 (custom properties, grid, fully responsive)
+- Vanilla JS (motion toggle, scroll reveal, laptop slider)
 - GitHub Pages
 
 Previous portfolio: [godde3s.github.io/Usf](https://godde3s.github.io/Usf/)

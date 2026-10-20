@@ -1,252 +1,68 @@
-/* Reza Bazdar (Godde3s) — portfolio interactions · v12
-   Fenrir-inspired: theme system (light/dark/system), motion toggle,
-   résumé/agents view switch, count-up stats, laptop stories slider. */
+/* ============================================================
+   Reza Bazdar (Godde3s) — v13
+   pause-motion control, reveal-on-scroll, laptop stories slider.
+   ============================================================ */
 (function () {
   'use strict';
 
-  // Progressive enhancement flag — reveals only hide content when JS runs
-  document.documentElement.classList.add('js');
+  /* ---------------- motion control (fenrir signature) ---------------- */
+  var root = document.documentElement;
+  var MOTION_KEY = 'rb-motion';
+  var media = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  var docEl = document.documentElement;
-  var motionOff = false;
-
-  /* ---------------- theme system: light / dark / system ---------------- */
-  var THEME_KEY = 'or-theme';
-  var themeBtns = Array.prototype.slice.call(document.querySelectorAll('[data-set-theme]'));
-
-  function applyTheme(pref) {
-    docEl.setAttribute('data-theme', pref);
-    docEl.classList.add('theming');
-    window.clearTimeout(applyTheme._t);
-    applyTheme._t = window.setTimeout(function () { docEl.classList.remove('theming'); }, 380);
-    themeBtns.forEach(function (btn) {
-      var on = btn.getAttribute('data-set-theme') === pref;
-      btn.classList.toggle('is-active', on);
-      btn.setAttribute('aria-checked', String(on));
-    });
+  function applyMotion(on) {
+    root.classList.toggle('motion-off', !on);
+    var btn = document.getElementById('motionBtn');
+    if (btn) btn.setAttribute('aria-pressed', on ? 'false' : 'true');
+    if (typeof window.orStoriesAuto === 'function') window.orStoriesAuto(on);
   }
 
-  function initTheme() {
-    var pref = 'system';
-    try { pref = localStorage.getItem(THEME_KEY) || 'system'; } catch (e) { /* private mode */ }
-    applyTheme(['light', 'dark', 'system'].indexOf(pref) > -1 ? pref : 'system');
-    themeBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var val = btn.getAttribute('data-set-theme');
-        applyTheme(val);
-        try { localStorage.setItem(THEME_KEY, val); } catch (e) { /* ignore */ }
-      });
-    });
+  function storedMotion() {
+    try { var v = localStorage.getItem(MOTION_KEY); if (v === 'off') return false; if (v === 'on') return true; } catch (e) {}
+    return null;
   }
-  initTheme();
 
-  /* ---------------- motion toggle (fenrir "Pause motion") ---------------- */
+  var initial = storedMotion();
+  if (initial === null) initial = !media.matches;
+  applyMotion(initial);
+
   var motionBtn = document.getElementById('motionBtn');
-  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function isMotionOff() { return motionOff; }
-
-  function setMotion(off) {
-    motionOff = off;
-    docEl.classList.toggle('motion-off', off);
-    docEl.classList.toggle('motion-on', !off);
-    if (motionBtn) motionBtn.setAttribute('aria-pressed', String(off));
-    if (window.orStoriesAuto) window.orStoriesAuto(!off);
-  }
-
   if (motionBtn) {
-    motionBtn.addEventListener('click', function () { setMotion(!motionOff); });
-  }
-  if (prefersReduced) {
-    // start paused; the user can press "Play motion" to override
-    setMotion(true);
-  }
-
-  /* ---------------- current year ---------------- */
-  var year = document.getElementById('year');
-  if (year) year.textContent = String(new Date().getFullYear());
-
-  /* ---------------- sticky nav shadow ---------------- */
-  var nav = document.getElementById('nav');
-  var onScroll = function () {
-    if (nav) nav.classList.toggle('scrolled', window.scrollY > 8);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  /* ---------------- mobile menu ---------------- */
-  var burger = document.getElementById('burger');
-  var links = document.getElementById('navLinks');
-  if (burger && links) {
-    burger.addEventListener('click', function () {
-      var open = links.classList.toggle('open');
-      burger.classList.toggle('open', open);
-      burger.setAttribute('aria-expanded', String(open));
+    motionBtn.addEventListener('click', function () {
+      var on = root.classList.contains('motion-off'); // paused right now -> turning motion on
+      try { localStorage.setItem(MOTION_KEY, on ? 'on' : 'off'); } catch (e) {}
+      applyMotion(on);
     });
-    links.addEventListener('click', function (e) {
-      if (e.target && e.target.tagName === 'A') {
-        links.classList.remove('open');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-      }
+  }
+  if (media.addEventListener) {
+    media.addEventListener('change', function (e) {
+      if (storedMotion() === null) applyMotion(!e.matches);
     });
   }
 
   /* ---------------- reveal on scroll ---------------- */
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  if ('IntersectionObserver' in window && !root.classList.contains('motion-off')) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
       });
-    }, { threshold: 0, rootMargin: '0px 0px 120px 0px' });
-    revealEls.forEach(function (el) { io.observe(el); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
   } else {
-    revealEls.forEach(function (el) { el.classList.add('in'); });
+    reveals.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* ---------------- résumé <-> agents view switch ----------------
-     One mode drives ALL .hero-state blocks (headline group + card group),
-     matched by data-state instead of index. */
-  (function () {
-    var toggle = document.getElementById('heroToggle');
-    if (!toggle) return;
-    var hero = document.querySelector('.hero');
-    var lens = toggle.querySelector('.lens');
-    var opts = Array.prototype.slice.call(toggle.querySelectorAll('.opt'));
-    var states = Array.prototype.slice.call(document.querySelectorAll('.hero-state'));
-    var idx = 0;
+  /* ---------------- year ---------------- */
+  var year = document.getElementById('year');
+  if (year) year.textContent = String(new Date().getFullYear());
 
-    function position(instant) {
-      var opt = opts[idx];
-      if (!opt || !lens) return;
-      var border = parseFloat(getComputedStyle(toggle).borderLeftWidth) || 0;
-      if (instant) lens.style.transition = 'none';
-      var tr = toggle.getBoundingClientRect();
-      var or = opt.getBoundingClientRect();
-      toggle.style.setProperty('--lens-left', Math.max(or.left - tr.left - border, 0) + 'px');
-      toggle.style.setProperty('--lens-width', or.width + 'px');
-      if (instant) {
-        void lens.offsetWidth;
-        lens.style.transition = '';
-      }
-    }
-
-    function select(i) {
-      idx = (i + opts.length) % opts.length;
-      var mode = opts[idx].getAttribute('data-mode') || 'humans';
-      opts.forEach(function (o, j) {
-        o.classList.toggle('is-active', j === idx);
-        o.setAttribute('aria-selected', String(j === idx));
-      });
-      states.forEach(function (st) {
-        var on = st.getAttribute('data-state') === mode;
-        st.classList.toggle('is-active', on);
-        st.setAttribute('aria-hidden', String(!on));
-      });
-      if (hero) hero.setAttribute('data-view', mode);
-      position(false);
-    }
-
-    opts.forEach(function (o, i) {
-      o.addEventListener('click', function () { select(i); });
-    });
-
-    toggle.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        select(idx + 1);
-        opts[idx].focus();
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        select(idx - 1);
-        opts[idx].focus();
-      }
-    });
-
-    window.addEventListener('resize', function () { position(true); });
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () { position(true); });
-    }
-    window.setTimeout(function () { position(true); }, 60);
-  })();
-
-  /* ---------------- count-up numbers (motion-aware) ---------------- */
-  (function () {
-    var nums = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
-    if (!nums.length) return;
-
-    function finalText(el) { return el.getAttribute('data-count'); }
-
-    function animate(el) {
-      var target = parseInt(el.getAttribute('data-count'), 10);
-      if (isNaN(target)) return;
-      if (isMotionOff() || !('requestAnimationFrame' in window)) {
-        el.textContent = String(target);
-        return;
-      }
-      var t0 = null;
-      var DUR = 1100;
-      function tick(ts) {
-        if (t0 === null) t0 = ts;
-        var p = Math.min((ts - t0) / DUR, 1);
-        var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = String(Math.round(target * eased));
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-
-    function setFinalAll() {
-      nums.forEach(function (el) { el.textContent = finalText(el); });
-    }
-
-    if (!('IntersectionObserver' in window)) { setFinalAll(); return; }
-
-    // count-up respects live motion toggling
-    var done = false;
-    var nio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !done) {
-          done = true;
-          if (isMotionOff()) { setFinalAll(); }
-          else { nums.forEach(animate); }
-          nio.disconnect();
-        }
-      });
-    }, { threshold: 0.4 });
-    nums.forEach(function (el) { nio.observe(el); });
-
-    window.addEventListener('or-motion-change', function () {
-      if (done && isMotionOff()) setFinalAll();
-    });
-  })();
-
-  // notify listeners when motion preference changes
-  var _origSetMotion = setMotion;
-  setMotion = function (off) {
-    _origSetMotion(off);
-    document.dispatchEvent(new CustomEvent('or-motion-change'));
-  };
-  if (prefersReduced) setMotion(true);
-})();
-
-/* ---------------- Project stories laptop — vanilla port of Usf VibeStories ---------------- */
-(function () {
-  'use strict';
-
+  /* ---------------- laptop stories slider ---------------- */
   var container = document.getElementById('vibeStories');
   if (!container) return;
 
   var STORIES = [
     {
-      id: 1,
-      title: 'One router for every model',
-      author: 'omnirouter · Go',
-      avatar: 'network',
       image: 'assets/stories/story-1.webp',
       srcset: 'assets/stories/story-1-640.webp 640w, assets/stories/story-1.webp 1280w',
       imageHeight: 959,
@@ -254,10 +70,6 @@
       link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-1/'
     },
     {
-      id: 2,
-      title: 'A one-click AI server on a free Space',
-      author: 'hermes-stack · Python',
-      avatar: 'activity',
       image: 'assets/stories/story-2.webp',
       srcset: 'assets/stories/story-2-640.webp 640w, assets/stories/story-2.webp 1280w',
       imageHeight: 959,
@@ -265,10 +77,6 @@
       link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-2/'
     },
     {
-      id: 3,
-      title: 'A backend where every security claim has a test',
-      author: 'taskflow-api · Python',
-      avatar: 'shield',
       image: 'assets/stories/story-3.webp',
       srcset: 'assets/stories/story-3-640.webp 640w, assets/stories/story-3.webp 1280w',
       imageHeight: 959,
@@ -276,10 +84,6 @@
       link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-3/'
     },
     {
-      id: 4,
-      title: 'Realtime chat you self-host in one command',
-      author: 'goftego · Node.js',
-      avatar: 'layout',
       image: 'assets/stories/story-4.webp',
       srcset: 'assets/stories/story-4-640.webp 640w, assets/stories/story-4.webp 1280w',
       imageHeight: 959,
@@ -306,9 +110,7 @@
   function syncInfo() {
     var s = story(currentIndex);
     if (screenLink) screenLink.href = s.link;
-    dots.forEach(function (dot, i) {
-      dot.classList.toggle('active', i === currentIndex);
-    });
+    dots.forEach(function (dot, i) { dot.classList.toggle('active', i === currentIndex); });
   }
 
   function mountImage(s) {
@@ -347,63 +149,45 @@
 
     window.setTimeout(function () {
       enter.classList.remove(name + '-enter-active');
-      leaving.forEach(function (el) {
-        if (el.parentNode) el.parentNode.removeChild(el);
-      });
+      leaving.forEach(function (el) { if (el.parentNode) el.parentNode.removeChild(el); });
     }, TRANSITION_MS);
   }
 
-  var next = function () {
+  function go(delta) {
     if (isPaginating) return;
     isPaginating = true;
-    slideTo((currentIndex + 1) % STORIES.length, 'slide-left');
-    currentIndex = (currentIndex + 1) % STORIES.length;
+    var idx = (currentIndex + delta + STORIES.length) % STORIES.length;
+    slideTo(idx, delta > 0 ? 'slide-left' : 'slide-right');
+    currentIndex = idx;
     syncInfo();
     window.setTimeout(function () { isPaginating = false; }, PAGINATE_LOCK_MS);
-  };
+  }
 
-  var prev = function () {
-    if (isPaginating) return;
-    isPaginating = true;
-    slideTo((currentIndex - 1 + STORIES.length) % STORIES.length, 'slide-right');
-    currentIndex = (currentIndex - 1 + STORIES.length) % STORIES.length;
-    syncInfo();
-    window.setTimeout(function () { isPaginating = false; }, PAGINATE_LOCK_MS);
-  };
-
-  var setIndex = function (index) {
-    if (index === currentIndex) return;
+  function setIndex(index) {
+    if (index === currentIndex || isPaginating) return;
     slideTo(index, index > currentIndex ? 'slide-left' : 'slide-right');
     currentIndex = index;
     syncInfo();
-  };
+  }
 
-  var startAutoplay = function () {
+  function startAutoplay() {
     if (!wantAutoplay) return;
     stopAutoplay();
     autoplayTimer = window.setInterval(function () {
-      if (!isPaginating) {
-        slideTo((currentIndex + 1) % STORIES.length, 'slide-left');
-        currentIndex = (currentIndex + 1) % STORIES.length;
-        syncInfo();
-      }
+      if (!isPaginating) go(1);
     }, AUTOPLAY_MS);
-  };
+  }
+  function stopAutoplay() {
+    if (autoplayTimer) { window.clearInterval(autoplayTimer); autoplayTimer = null; }
+  }
 
-  var stopAutoplay = function () {
-    if (autoplayTimer) {
-      window.clearInterval(autoplayTimer);
-      autoplayTimer = null;
-    }
-  };
-
-  // motion-toggle hook: autoplay follows the global motion switch
+  // motion-toggle hook
   window.orStoriesAuto = function (on) { wantAutoplay = on; if (on) startAutoplay(); else stopAutoplay(); };
 
   var prevBtn = container.querySelector('.nav-btn.prev');
   var nextBtn = container.querySelector('.nav-btn.next');
-  if (prevBtn) prevBtn.addEventListener('click', function () { prev(); stopAutoplay(); startAutoplay(); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { next(); stopAutoplay(); startAutoplay(); });
+  if (prevBtn) prevBtn.addEventListener('click', function () { go(-1); stopAutoplay(); startAutoplay(); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { go(1); stopAutoplay(); startAutoplay(); });
   dots.forEach(function (dot, i) {
     dot.addEventListener('click', function () { setIndex(i); stopAutoplay(); startAutoplay(); });
   });
@@ -416,11 +200,10 @@
   container.addEventListener('wheel', function (e) {
     if (Math.abs(e.deltaX) > 20 && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
       e.preventDefault();
-      if (e.deltaX > 0) { next(); } else { prev(); }
+      go(e.deltaX > 0 ? 1 : -1);
     }
   }, { passive: false });
 
-  /* touch swipe — horizontal intent only, vertical scroll untouched */
   var touchX = 0, touchY = 0, touchT = 0;
   container.addEventListener('touchstart', function (e) {
     if (!e.touches.length) return;
@@ -434,12 +217,11 @@
     var dy = e.changedTouches[0].clientY - touchY;
     if (Date.now() - touchT > 800) return;
     if (Math.abs(dx) < 44 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
-    if (dx < 0) { next(); } else { prev(); }
+    go(dx < 0 ? 1 : -1);
     stopAutoplay(); startAutoplay();
   }, { passive: true });
 
-  // start autoplay only if motion is allowed (script.js sets motion classes)
-  wantAutoplay = !document.documentElement.classList.contains('motion-off');
+  wantAutoplay = !root.classList.contains('motion-off');
   syncInfo();
   if (wantAutoplay) startAutoplay();
 })();
