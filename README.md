@@ -12,9 +12,9 @@ A deliberately simple, single-page portfolio built with plain HTML, CSS and vani
 
 - Hero — open-to-work tag, serif headline, wolf mascot with pause-motion control
 - In numbers — stats band (repos, projects, languages)
-- Selected work — 14 editorial rows, each linking to a public repository
+- Selected work — 14 compact project cards with category filter chips (Backend & APIs / AI & Automation / Apps / Infra & Industrial)
 - Project stories — MacBook slider (kept from the previous design, touch swipe enabled)
-- The toolbox — 12 skills including UI/UX design
+- The toolbox — 6 categorized skill bands with market-demand highlights (frontend, backend & APIs, databases, system design, industrial, DevOps)
 - How it works — three steps
 - Footer — CTA, link columns and a giant wordmark
 

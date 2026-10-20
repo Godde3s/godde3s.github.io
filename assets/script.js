@@ -1,6 +1,6 @@
 /* ============================================================
-   Reza Bazdar (Godde3s) — v13
-   pause-motion control, reveal-on-scroll, laptop stories slider.
+   Reza Bazdar (Godde3s) — v14
+   pause-motion control, reveal-on-scroll, work filters, laptop stories slider.
    ============================================================ */
 (function () {
   'use strict';
@@ -56,6 +56,23 @@
   /* ---------------- year ---------------- */
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
+
+  /* ---------------- work category filters ---------------- */
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.work-chip'));
+  var workCards = Array.prototype.slice.call(document.querySelectorAll('.work-card'));
+  if (chips.length && workCards.length) {
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var f = chip.getAttribute('data-filter');
+        chips.forEach(function (c) { c.classList.toggle('is-active', c === chip); });
+        workCards.forEach(function (card) {
+          var show = f === 'all' || card.getAttribute('data-cat') === f;
+          if (show) card.removeAttribute('hidden');
+          else card.setAttribute('hidden', '');
+        });
+      });
+    });
+  }
 
   /* ---------------- laptop stories slider ---------------- */
   var container = document.getElementById('vibeStories');
