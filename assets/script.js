@@ -1,15 +1,72 @@
-/* OR — portfolio interactions (vanilla, no dependencies) · v7 */
+/* Reza Bazdar (Godde3s) — portfolio interactions · v12
+   Fenrir-inspired: theme system (light/dark/system), motion toggle,
+   résumé/agents view switch, count-up stats, laptop stories slider. */
 (function () {
   'use strict';
 
   // Progressive enhancement flag — reveals only hide content when JS runs
   document.documentElement.classList.add('js');
 
-  // Current year in footer
+  var docEl = document.documentElement;
+  var motionOff = false;
+
+  /* ---------------- theme system: light / dark / system ---------------- */
+  var THEME_KEY = 'or-theme';
+  var themeBtns = Array.prototype.slice.call(document.querySelectorAll('[data-set-theme]'));
+
+  function applyTheme(pref) {
+    docEl.setAttribute('data-theme', pref);
+    docEl.classList.add('theming');
+    window.clearTimeout(applyTheme._t);
+    applyTheme._t = window.setTimeout(function () { docEl.classList.remove('theming'); }, 380);
+    themeBtns.forEach(function (btn) {
+      var on = btn.getAttribute('data-set-theme') === pref;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-checked', String(on));
+    });
+  }
+
+  function initTheme() {
+    var pref = 'system';
+    try { pref = localStorage.getItem(THEME_KEY) || 'system'; } catch (e) { /* private mode */ }
+    applyTheme(['light', 'dark', 'system'].indexOf(pref) > -1 ? pref : 'system');
+    themeBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var val = btn.getAttribute('data-set-theme');
+        applyTheme(val);
+        try { localStorage.setItem(THEME_KEY, val); } catch (e) { /* ignore */ }
+      });
+    });
+  }
+  initTheme();
+
+  /* ---------------- motion toggle (fenrir "Pause motion") ---------------- */
+  var motionBtn = document.getElementById('motionBtn');
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function isMotionOff() { return motionOff; }
+
+  function setMotion(off) {
+    motionOff = off;
+    docEl.classList.toggle('motion-off', off);
+    docEl.classList.toggle('motion-on', !off);
+    if (motionBtn) motionBtn.setAttribute('aria-pressed', String(off));
+    if (window.orStoriesAuto) window.orStoriesAuto(!off);
+  }
+
+  if (motionBtn) {
+    motionBtn.addEventListener('click', function () { setMotion(!motionOff); });
+  }
+  if (prefersReduced) {
+    // start paused; the user can press "Play motion" to override
+    setMotion(true);
+  }
+
+  /* ---------------- current year ---------------- */
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 
-  // Sticky nav shadow on scroll
+  /* ---------------- sticky nav shadow ---------------- */
   var nav = document.getElementById('nav');
   var onScroll = function () {
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 8);
@@ -17,7 +74,7 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Mobile menu
+  /* ---------------- mobile menu ---------------- */
   var burger = document.getElementById('burger');
   var links = document.getElementById('navLinks');
   if (burger && links) {
@@ -35,7 +92,7 @@
     });
   }
 
-  // Reveal on scroll
+  /* ---------------- reveal on scroll ---------------- */
   var revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -51,9 +108,9 @@
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* ---- Deepnote humans <-> agents toggle (mechanics mirrored from deepnote.com) ----
-     data-view on .hero drives the lens color morph + white label + purple glow;
-     the lens slides via --lens-left/--lens-width; hero rows swap with deepnote curves. */
+  /* ---------------- résumé <-> agents view switch ----------------
+     One mode drives ALL .hero-state blocks (headline group + card group),
+     matched by data-state instead of index. */
   (function () {
     var toggle = document.getElementById('heroToggle');
     if (!toggle) return;
@@ -80,17 +137,17 @@
 
     function select(i) {
       idx = (i + opts.length) % opts.length;
-      var mode = opts[idx].getAttribute('data-mode');
+      var mode = opts[idx].getAttribute('data-mode') || 'humans';
       opts.forEach(function (o, j) {
         o.classList.toggle('is-active', j === idx);
         o.setAttribute('aria-selected', String(j === idx));
       });
-      states.forEach(function (st, j) {
-        var on = j === idx;
+      states.forEach(function (st) {
+        var on = st.getAttribute('data-state') === mode;
         st.classList.toggle('is-active', on);
         st.setAttribute('aria-hidden', String(!on));
       });
-      if (hero) hero.setAttribute('data-view', mode || 'humans');
+      if (hero) hero.setAttribute('data-view', mode);
       position(false);
     }
 
@@ -98,7 +155,6 @@
       o.addEventListener('click', function () { select(i); });
     });
 
-    // Arrow-key support on the toggle
     toggle.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
@@ -117,9 +173,68 @@
     }
     window.setTimeout(function () { position(true); }, 60);
   })();
+
+  /* ---------------- count-up numbers (motion-aware) ---------------- */
+  (function () {
+    var nums = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!nums.length) return;
+
+    function finalText(el) { return el.getAttribute('data-count'); }
+
+    function animate(el) {
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      if (isNaN(target)) return;
+      if (isMotionOff() || !('requestAnimationFrame' in window)) {
+        el.textContent = String(target);
+        return;
+      }
+      var t0 = null;
+      var DUR = 1100;
+      function tick(ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / DUR, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = String(Math.round(target * eased));
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function setFinalAll() {
+      nums.forEach(function (el) { el.textContent = finalText(el); });
+    }
+
+    if (!('IntersectionObserver' in window)) { setFinalAll(); return; }
+
+    // count-up respects live motion toggling
+    var done = false;
+    var nio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !done) {
+          done = true;
+          if (isMotionOff()) { setFinalAll(); }
+          else { nums.forEach(animate); }
+          nio.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    nums.forEach(function (el) { nio.observe(el); });
+
+    window.addEventListener('or-motion-change', function () {
+      if (done && isMotionOff()) setFinalAll();
+    });
+  })();
+
+  // notify listeners when motion preference changes
+  var _origSetMotion = setMotion;
+  setMotion = function (off) {
+    _origSetMotion(off);
+    document.dispatchEvent(new CustomEvent('or-motion-change'));
+  };
+  if (prefersReduced) setMotion(true);
 })();
 
-/* ---- Project stories laptop — faithful vanilla port of Usf VibeStories.vue ---- */
+/* ---------------- Project stories laptop — vanilla port of Usf VibeStories ---------------- */
 (function () {
   'use strict';
 
@@ -158,7 +273,7 @@
       srcset: 'assets/stories/story-3-640.webp 640w, assets/stories/story-3.webp 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-4/'
+      link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-3/'
     },
     {
       id: 4,
@@ -184,6 +299,7 @@
   var currentIndex = 0;
   var isPaginating = false;
   var autoplayTimer = null;
+  var wantAutoplay = true;
 
   function story(i) { return STORIES[i] || STORIES[0]; }
 
@@ -225,7 +341,7 @@
 
     enter.classList.add(name + '-enter-active', name + '-enter-from');
     leaving.forEach(function (el) { el.classList.add(name + '-leave-active'); });
-    void enter.offsetWidth; // force reflow so the enter-from state applies
+    void enter.offsetWidth;
     enter.classList.remove(name + '-enter-from');
     leaving.forEach(function (el) { el.classList.add(name + '-leave-to'); });
 
@@ -263,6 +379,7 @@
   };
 
   var startAutoplay = function () {
+    if (!wantAutoplay) return;
     stopAutoplay();
     autoplayTimer = window.setInterval(function () {
       if (!isPaginating) {
@@ -280,6 +397,9 @@
     }
   };
 
+  // motion-toggle hook: autoplay follows the global motion switch
+  window.orStoriesAuto = function (on) { wantAutoplay = on; if (on) startAutoplay(); else stopAutoplay(); };
+
   var prevBtn = container.querySelector('.nav-btn.prev');
   var nextBtn = container.querySelector('.nav-btn.next');
   if (prevBtn) prevBtn.addEventListener('click', function () { prev(); stopAutoplay(); startAutoplay(); });
@@ -296,15 +416,11 @@
   container.addEventListener('wheel', function (e) {
     if (Math.abs(e.deltaX) > 20 && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
       e.preventDefault();
-      if (e.deltaX > 0) {
-        next();
-      } else {
-        prev();
-      }
+      if (e.deltaX > 0) { next(); } else { prev(); }
     }
   }, { passive: false });
 
-  /* touch swipe — real mobile gesture (horizontal intent only, vertical scroll untouched) */
+  /* touch swipe — horizontal intent only, vertical scroll untouched */
   var touchX = 0, touchY = 0, touchT = 0;
   container.addEventListener('touchstart', function (e) {
     if (!e.touches.length) return;
@@ -322,6 +438,8 @@
     stopAutoplay(); startAutoplay();
   }, { passive: true });
 
+  // start autoplay only if motion is allowed (script.js sets motion classes)
+  wantAutoplay = !document.documentElement.classList.contains('motion-off');
   syncInfo();
-  startAutoplay();
+  if (wantAutoplay) startAutoplay();
 })();

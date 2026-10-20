@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="system">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -14,42 +14,56 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=14">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css?v=15">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav" id="nav">
   <div class="container nav-inner">
-    <a class="brand" href="#top" aria-label="OR — home">
-      <span class="brand-mark" aria-hidden="true">OR</span>
+    <a class="brand" href="#top" aria-label="Reza Bazdar — home">
+      <span class="brand-mark" aria-hidden="true">RB</span>
       <span class="brand-text">Reza Bazdar</span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#stories">Stories</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
-      <a href="#agentic">Agentic</a>
-      <a href="#about">About</a>
+      <a href="#agentic">Agents</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
       <a class="btn btn-primary btn-sm nav-gh" href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions">
+      <div class="theme-toggle" role="radiogroup" aria-label="Color theme">
+        <button type="button" class="tt-opt" data-set-theme="light" role="radio" aria-checked="false" aria-label="Light theme" title="Light">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </button>
+        <button type="button" class="tt-opt" data-set-theme="dark" role="radio" aria-checked="false" aria-label="Dark theme" title="Dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button type="button" class="tt-opt" data-set-theme="system" role="radio" aria-checked="false" aria-label="Follow system theme" title="System">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+      </div>
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
 <main id="main">
-  <!-- ============ HERO — short intro + one summary box ============ -->
+
+  <!-- ============ HERO — fenrir-style: big centered type + mascot visual ============ -->
   <section class="hero" id="top" data-view="humans">
     <div class="hero-bg" aria-hidden="true">
       <div class="hero-glow hero-glow-a"></div>
       <div class="hero-glow hero-glow-b"></div>
     </div>
-    <div class="container hero-solo">
-      <div class="hero-copy reveal">
+    <div class="container">
+      <div class="hero-top reveal">
         <span class="pill pill-green"><span class="dot"></span> Open to work — freelance &amp; full-time</span>
 
         <div class="hero-toggle" id="heroToggle" role="tablist" aria-label="Portfolio view">
@@ -57,24 +71,57 @@
           <button type="button" role="tab" class="opt is-active" data-mode="humans" aria-selected="true">résumé</button>
           <button type="button" role="tab" class="opt" data-mode="agents" aria-selected="false">agents</button>
         </div>
+      </div>
 
-        <div class="hero-states">
-          <!-- résumé -->
-          <div class="hero-state is-active" data-state="humans" role="tabpanel" aria-label="Résumé view">
-            <h1 class="display">
-              <span class="display-line">Software, designed and</span>
-              <span class="display-line">shipped end&#8209;to&#8209;end.</span>
-            </h1>
-            <p class="lede">
-              I&rsquo;m <strong>Reza Bazdar</strong> — full&#8209;stack engineer. Web, mobile &amp; desktop apps,
-              network tooling, IoT and AI infrastructure, from one pair of hands.
-            </p>
-            <div class="hero-cta">
-              <a class="btn btn-primary" href="#projects">Explore projects</a>
-              <a class="btn btn-ghost" href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub profile</a>
-            </div>
+      <div class="hero-states">
+        <!-- résumé -->
+        <div class="hero-state is-active" data-state="humans" role="tabpanel" aria-label="Résumé view">
+          <h1 class="display">
+            <span class="display-line">Software, designed and</span>
+            <span class="display-line">shipped end&#8209;to&#8209;end.</span>
+          </h1>
+          <p class="lede">
+            I&rsquo;m <strong>Reza Bazdar</strong> — full&#8209;stack engineer. Web, mobile &amp; desktop apps,
+            network tooling, IoT and AI infrastructure, from one pair of hands.
+          </p>
+          <div class="hero-cta center-cta">
+            <a class="btn btn-primary" href="#stories">Explore the work <span class="arrow-down" aria-hidden="true">↓</span></a>
+            <a class="btn btn-ghost" href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub profile</a>
+          </div>
+        </div>
+        <!-- agents -->
+        <div class="hero-state" data-state="agents" role="tabpanel" aria-label="Agents view" aria-hidden="true">
+          <h1 class="display">
+            <span class="display-line">I don&rsquo;t just use AI.</span>
+            <span class="display-line">I direct <span class="highlight">agent teams.</span></span>
+          </h1>
+          <p class="lede">
+            Four agents, one orchestrator — the right brain for every task, every day.
+          </p>
+          <div class="hero-cta center-cta">
+            <a class="btn btn-primary" href="#agentic">See the stack <span class="arrow-down" aria-hidden="true">↓</span></a>
+            <a class="btn btn-ghost" href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub profile</a>
+          </div>
+        </div>
+      </div>
 
-            <!-- the summary box -->
+      <!-- mascot + summary card row -->
+      <div class="hero-row">
+        <div class="wolf-stage reveal" id="wolfStage">
+          <div class="wolf-glow" aria-hidden="true"></div>
+          <img class="wolf-img" src="assets/fenrir.webp" alt="Fenrir — the geometric wolf mascot of this portfolio" width="900" height="900" decoding="async">
+          <span class="wolf-chip chip-a mono" aria-hidden="true">Go</span>
+          <span class="wolf-chip chip-b mono" aria-hidden="true">Expo</span>
+          <span class="wolf-chip chip-c mono" aria-hidden="true">PLC · LD/ST</span>
+          <span class="wolf-chip chip-d mono" aria-hidden="true">LLM ops</span>
+          <button class="motion-btn mono" id="motionBtn" type="button" aria-pressed="false" title="Toggle page animations">
+            <span class="mb-label-on">Pause motion</span><span class="mb-label-off">Play motion</span>
+          </button>
+        </div>
+
+        <div class="hero-cards">
+          <!-- the summary box — résumé edition -->
+          <div class="hero-state is-active" data-state="humans" role="tabpanel" aria-label="Summary card" aria-hidden="false">
             <div class="resume-card">
               <div class="rc-head">
                 <img class="rc-avatar" src="assets/avatar.jpg" alt="Portrait of Reza Bazdar" width="52" height="52">
@@ -104,21 +151,8 @@
               </div>
             </div>
           </div>
-          <!-- agents -->
-          <div class="hero-state" data-state="agents" role="tabpanel" aria-label="Agents view" aria-hidden="true">
-            <h1 class="display">
-              <span class="display-line">I don&rsquo;t just use AI.</span>
-              <span class="display-line">I direct <span class="highlight">agent teams.</span></span>
-            </h1>
-            <p class="lede">
-              Four agents, one orchestrator — the right brain for every task.
-            </p>
-            <div class="hero-cta">
-              <a class="btn btn-primary" href="#agentic">See the stack</a>
-              <a class="btn btn-ghost" href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub profile</a>
-            </div>
-
-            <!-- the summary box — agents edition -->
+          <!-- the summary box — agents edition -->
+          <div class="hero-state" data-state="agents" role="tabpanel" aria-label="Agent stack card" aria-hidden="true">
             <div class="agents-card">
               <div class="ac-head">
                 <span class="ac-label mono">agent stack</span>
@@ -134,6 +168,16 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ NUMBERS — fenrir-style stats band ============ -->
+  <section class="numbers" aria-label="Portfolio in numbers">
+    <div class="container numbers-grid">
+      <div class="num reveal"><strong><span data-count="28">28</span></strong><span>public repos</span></div>
+      <div class="num reveal"><strong><span data-count="14">14</span></strong><span>linked projects</span></div>
+      <div class="num reveal"><strong><span data-count="10">10</span><i class="num-plus">+</i></strong><span>languages</span></div>
+      <div class="num reveal"><strong>2025</strong><span>shipping since</span></div>
     </div>
   </section>
 
@@ -229,11 +273,11 @@
           <span class="rt-row"><i class="rt-dot" style="background:#f1e05a"></i><span class="rt-name">Goftego</span><svg class="rt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
           <span class="rt-lang">JavaScript</span>
         </a>
-                <a class="repo-tile reveal" href="https://github.com/Godde3s/hermes-stack" target="_blank" rel="noopener">
+        <a class="repo-tile reveal" href="https://github.com/Godde3s/hermes-stack" target="_blank" rel="noopener">
           <span class="rt-row"><i class="rt-dot" style="background:#3572A5"></i><span class="rt-name">Hermes Stack</span><svg class="rt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
           <span class="rt-lang">Python · AI server</span>
         </a>
-<a class="repo-tile reveal" href="https://github.com/Godde3s/postman-api-testing-toolkit" target="_blank" rel="noopener">
+        <a class="repo-tile reveal" href="https://github.com/Godde3s/postman-api-testing-toolkit" target="_blank" rel="noopener">
           <span class="rt-row"><i class="rt-dot" style="background:#FF6C37"></i><span class="rt-name">Postman Toolkit</span><svg class="rt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
           <span class="rt-lang">API Testing</span>
         </a>
@@ -347,43 +391,94 @@
     </div>
   </section>
 
-  <!-- ============ ABOUT ============ -->
-  <section class="section soft" id="about">
-    <div class="container about-grid">
-      <div class="about-media reveal">
-        <div class="about-card">
-          <img src="assets/avatar.jpg" alt="Portrait of Reza Bazdar" width="220" height="220">
-          <div class="about-float about-float-a mono">28 repos · all live</div>
-          <div class="about-float about-float-b mono">MIT — reuse anything</div>
-        </div>
-        <ul class="stats">
-          <li><strong>28</strong><span>public repos</span></li>
-          <li><strong>10+</strong><span>languages</span></li>
-          <li><strong>2025</strong><span>shipping since</span></li>
-        </ul>
-      </div>
-      <div class="about-copy reveal">
-        <span class="eyebrow">About</span>
-        <h2 class="display-2">Creative by instinct, engineer by discipline.</h2>
-        <p>
-          I&rsquo;m Reza Bazdar, a full-stack software engineer from Iran who builds end-to-end:
-          web platforms, mobile apps with Expo &amp; React Native, desktop apps with Tauri and
-          Electron, network tooling, IoT &amp; industrial automation and AI infrastructure.
-          I write in whatever language the job demands — and I ship. Every repository linked
-          from this page is a working, public build; documentation, tests and deployment
-          scripts included.
-        </p>
-        <p>
-          My work splits into four threads: <strong>collaboration software</strong> (chat platforms
-          and encrypted messengers), <strong>developer infrastructure</strong> (API bridges and model
-          routers), <strong>network tooling</strong> (edge panels and single-binary utilities) and
-          <strong>IoT &amp; industrial automation</strong> (PLC programs in LD &amp; ST, Modbus TCP). I work
-          in public — browse the code, read the build notes and reuse anything under MIT.
-        </p>
-        <div class="about-links">
-          <a class="btn btn-ghost btn-sm" href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub profile</a>
-          <a class="btn btn-ghost btn-sm" href="https://godde3s.github.io/Usf/" target="_blank" rel="noopener">Long-form portfolio (Usf)</a>
-        </div>
+  <!-- ============ WHAT WE CAN BUILD — roman-numeral use cases ============ -->
+  <section class="section soft" id="build">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="eyebrow">What you can build with me</span>
+        <h2 class="display-2">From idea to production, one engineer.</h2>
+        <p class="lede">Pick a thread — each one already has shipped code behind it.</p>
+      </header>
+
+      <ol class="build-list">
+        <li class="build-item reveal">
+          <span class="bn mono" aria-hidden="true">i</span>
+          <div><h3>Realtime &amp; chat platforms</h3><p>Encrypted messengers and self-hosted chat — VeilChat, Goftego. E2E crypto, WebSockets, one-command deploys.</p></div>
+          <a class="bi-link" href="https://github.com/Godde3s/veilchat" target="_blank" rel="noopener" aria-label="VeilChat repository"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+        <li class="build-item reveal">
+          <span class="bn mono" aria-hidden="true">ii</span>
+          <div><h3>Developer &amp; AI infrastructure</h3><p>Model routers, OpenAI-compatible bridges and agent orchestrators — OmniRouter, Hermes Stack, GLM Free API.</p></div>
+          <a class="bi-link" href="https://github.com/Godde3s/omnirouter" target="_blank" rel="noopener" aria-label="OmniRouter repository"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+        <li class="build-item reveal">
+          <span class="bn mono" aria-hidden="true">iii</span>
+          <div><h3>Mobile apps</h3><p>React Native &amp; Expo apps built to a native design bar — Peregrine, HabitGrid. iOS &amp; Android from one codebase.</p></div>
+          <a class="bi-link" href="https://github.com/Godde3s/peregrine" target="_blank" rel="noopener" aria-label="Peregrine repository"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+        <li class="build-item reveal">
+          <span class="bn mono" aria-hidden="true">iv</span>
+          <div><h3>Desktop apps</h3><p>Tauri &amp; Electron builds that stay lightweight — cross-platform installers, native menus, tiny footprints.</p></div>
+          <a class="bi-link" href="https://github.com/Godde3s?tab=repositories" target="_blank" rel="noopener" aria-label="Repositories with desktop apps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+        <li class="build-item reveal">
+          <span class="bn mono" aria-hidden="true">v</span>
+          <div><h3>Network tooling &amp; edge</h3><p>Single-binary utilities, edge panels, tunnels and VLESS infrastructure — NetPilot and friends, mostly in Go.</p></div>
+          <a class="bi-link" href="https://github.com/Godde3s/netpilot" target="_blank" rel="noopener" aria-label="NetPilot repository"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+        <li class="build-item reveal">
+          <span class="bn mono" aria-hidden="true">vi</span>
+          <div><h3>IoT &amp; industrial automation</h3><p>PLC programs in LD &amp; ST (IEC 61131-3), Modbus TCP integrations and IoT bridges between shop floor and cloud.</p></div>
+          <a class="bi-link" href="https://github.com/Godde3s/modbuslite" target="_blank" rel="noopener" aria-label="ModbusLite repository"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section" id="process">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2 class="display-2">Three steps, no agency overhead.</h2>
+      </header>
+      <ol class="steps">
+        <li class="step reveal"><span class="step-n mono">01</span><h3>You bring the idea</h3><p>A repo, a spec, or one paragraph is enough — we scope it into a shippable first cut.</p></li>
+        <li class="step reveal"><span class="step-n mono">02</span><h3>I design &amp; build in public</h3><p>Docs, tests and CI appear as it grows — you watch progress land in real commits.</p></li>
+        <li class="step reveal"><span class="step-n mono">03</span><h3>You get a running system</h3><p>Deployed, monitored and documented — ready to hand over or keep evolving.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section soft" id="faq">
+    <div class="container faq-wrap">
+      <header class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="display-2">Questions, answered.</h2>
+      </header>
+
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>Can I see real code before reaching out?<span class="faq-x" aria-hidden="true"></span></summary>
+          <div class="faq-a"><p>Yes — all 28 repositories are public and MIT-licensed. Browse the code, read the build notes, run the tests and reuse anything you find useful.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>What do you ship with?<span class="faq-x" aria-hidden="true"></span></summary>
+          <div class="faq-a"><p>JavaScript/TypeScript, Python and Go at the core. Expo &amp; React Native for mobile, Tauri and Electron for desktop, PLC (LD/ST) and Modbus TCP for industrial work, Docker and CI for delivery.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Do you work remotely?<span class="faq-x" aria-hidden="true"></span></summary>
+          <div class="faq-a"><p>Yes — async-first, based in Iran (UTC+3:30). I keep a written trail of decisions in docs and commit history, so timezone gaps never block the work.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>How do you actually use AI?<span class="faq-x" aria-hidden="true"></span></summary>
+          <div class="faq-a"><p>I direct an agent team — Hermes Agent as the orchestrator, with Claude Code, Codex and OpenCode as specialized workers. Orchestration, not autopilot: every diff is reviewed and tested by me.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>How fast can we start?<span class="faq-x" aria-hidden="true"></span></summary>
+          <div class="faq-a"><p>Open-source collaboration starts the same week. Freelance work opens with a scoped one-to-two-week sprint so you get something running before committing further.</p></div>
+        </details>
       </div>
     </div>
   </section>
@@ -392,11 +487,12 @@
   <section class="section" id="contact">
     <div class="container">
       <div class="cta-panel reveal">
+        <span class="cta-wolf" aria-hidden="true"><img src="assets/fenrir.webp" alt="" width="120" height="120"></span>
         <h2 class="display-1">Your idea, live right now.</h2>
         <p>From spark to production — why not start today?</p>
         <div class="hero-cta center-cta">
           <a class="btn btn-primary btn-lg" href="https://github.com/Godde3s" target="_blank" rel="noopener">Hire me on GitHub</a>
-          <a class="btn btn-ghost-dark btn-lg" href="https://godde3s.github.io/Usf/" target="_blank" rel="noopener">Read the full story</a>
+          <a class="btn btn-ghost btn-lg" href="https://godde3s.github.io/Usf/" target="_blank" rel="noopener">Read the full story</a>
         </div>
       </div>
     </div>
@@ -404,17 +500,35 @@
 </main>
 
 <footer class="footer">
-  <div class="container footer-inner">
-    <p>&copy; <span id="year">2026</span> Reza Bazdar (Godde3s). All rights reserved.</p>
-    <p class="footer-dim">Designed &amp; built from scratch as <span class="mono">OR</span> — no templates, no page builders.</p>
-    <div class="footer-links">
-      <a href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://godde3s.github.io/Usf/" target="_blank" rel="noopener">Usf</a>
-      <a href="#top">Back to top</a>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="#top" aria-label="Reza Bazdar — back to top">
+        <span class="brand-mark" aria-hidden="true">RB</span>
+        <span class="brand-text">Reza Bazdar</span>
+      </a>
+      <p>Creative software engineer — ships web, mobile, desktop and industrial, end&#8209;to&#8209;end.</p>
     </div>
+    <nav class="footer-col" aria-label="Elsewhere">
+      <h4>Elsewhere</h4>
+      <a href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://godde3s.github.io/Usf/" target="_blank" rel="noopener">Long-form portfolio (Usf)</a>
+      <a href="#top">Back to top</a>
+    </nav>
+    <div class="footer-col">
+      <h4>Theme</h4>
+      <div class="footer-theme" role="radiogroup" aria-label="Color theme">
+        <button type="button" class="ft-btn" data-set-theme="light" role="radio" aria-checked="false">Light</button>
+        <button type="button" class="ft-btn" data-set-theme="dark" role="radio" aria-checked="false">Dark</button>
+        <button type="button" class="ft-btn" data-set-theme="system" role="radio" aria-checked="false">System</button>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-base">
+    <p>&copy; <span id="year">2026</span> Reza Bazdar (Godde3s). All rights reserved.</p>
+    <p class="mono footer-dim">designed &amp; built from scratch — no templates, no page builders</p>
   </div>
 </footer>
 
-<script src="assets/script.js?v=11"></script>
+<script src="assets/script.js?v=12"></script>
 </body>
 </html>
