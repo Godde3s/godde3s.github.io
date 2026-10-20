@@ -1,5 +1,5 @@
 /* ============================================================
-   Reza Bazdar (Godde3s) — v14
+   Usf (Godde3s) — v15
    pause-motion control, reveal-on-scroll, work filters, laptop stories slider.
    ============================================================ */
 (function () {

@@ -1,6 +1,6 @@
-# RB — Reza Bazdar (Godde3s) Portfolio
+# Usf — Portfolio (GitHub: Godde3s)
 
-Personal portfolio of **Reza Bazdar** — Creative Software Engineer.
+Personal portfolio of **Usf** — Software engineer && system designer.
 
 Live: https://godde3s.github.io/
 
@@ -10,18 +10,18 @@ A deliberately simple, single-page portfolio built with plain HTML, CSS and vani
 
 ## Sections
 
-- Hero — open-to-work tag, serif headline, wolf mascot with pause-motion control
+- Hero — open-to-work tag, "- Interested in learning !!" kicker, "Software .eng && System designer" headline, wolf mascot with pause-motion control
 - In numbers — stats band (repos, projects, languages)
 - Selected work — 14 compact project cards with category filter chips (Backend & APIs / AI & Automation / Apps / Infra & Industrial)
 - Project stories — MacBook slider (kept from the previous design, touch swipe enabled)
-- The toolbox — 6 categorized skill bands with market-demand highlights (frontend, backend & APIs, databases, system design, industrial, DevOps)
-- How it works — three steps
-- Footer — CTA, link columns and a giant wordmark
+- The toolbox — 8 categorized skill bands: AI-augmented workflow (Claude Code, Hermes, OpenCode), frontend & UI/UX (incl. WordPress), backend & APIs (language stack cards: Python, Node.js, Go, C#), databases, system design, desktop/IoT/industrial, DevOps & cloud (AWS, Cloudflare, Vercel…), learning now (Astro on Cloudflare Workers)
+- How it works — three steps, AI agent team emphasized
+- Footer — CTA, link columns and a giant USF wordmark
 
 ## Stack
 
 - HTML5 + CSS3 (custom properties, grid, fully responsive)
-- Vanilla JS (motion toggle, scroll reveal, laptop slider)
+- Vanilla JS (motion toggle, scroll reveal, category filters, laptop slider)
 - GitHub Pages
 
 Previous portfolio: [godde3s.github.io/Usf](https://godde3s.github.io/Usf/)

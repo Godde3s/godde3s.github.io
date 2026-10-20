@@ -1,5 +1,5 @@
 /* ============================================================
-   Reza Bazdar (Godde3s) — v17 · fenrir-inspired editorial
+   Usf (Godde3s) — v18 · fenrir-inspired editorial
    cream paper · serif display · hairlines · red accent
    ============================================================ */
 
@@ -102,6 +102,12 @@ button { font: inherit; color: inherit; }
   line-height: 1.04; letter-spacing: -.015em;
   margin-top: clamp(22px, 3.5vw, 40px);
   text-wrap: balance;
+}
+.h1-kicker {
+  display: block; font-family: var(--mono); font-weight: 500;
+  font-size: clamp(14px, 1.8vw, 19px); letter-spacing: .02em;
+  color: var(--accent);
+  margin: 0 0 clamp(12px, 2vw, 18px);
 }
 .byline { margin-top: clamp(14px, 2vw, 22px); color: var(--muted); font-size: clamp(15px, 1.6vw, 18px); }
 .byline a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line); transition: text-decoration-color .2s ease; }
@@ -309,6 +315,21 @@ button { font: inherit; color: inherit; }
   background: var(--accent); color: var(--paper);
   padding: 3px 8px; border-radius: 999px;
 }
+.pill.is-learning { border-style: dashed; color: var(--muted); }
+
+/* language stack cards (backend band) */
+.stack-wrap { display: flex; flex-direction: column; gap: 14px; }
+.stack-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.stack-card {
+  display: flex; flex-direction: column; gap: 3px;
+  border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px 16px;
+}
+.stack-name { font-weight: 600; font-size: 15.5px; }
+.stack-sub { font-size: 11px; letter-spacing: .01em; color: var(--muted); }
+.stack-card.is-hot { background: var(--ink); border-color: var(--ink); color: var(--paper); box-shadow: inset 3px 0 0 var(--accent); }
+.stack-card.is-hot .stack-sub { color: rgba(241, 238, 230, .72); }
+.stack-more { font-size: 11.5px; color: var(--muted); }
 
 /* ---------- process ---------- */
 .steps-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 48px); margin-top: clamp(30px, 4.5vw, 56px); }
@@ -359,7 +380,7 @@ button { font: inherit; color: inherit; }
 
 .footer-wordmark {
   font-family: var(--serif); font-weight: 500;
-  font-size: clamp(46px, 11.4vw, 176px);
+  font-size: clamp(64px, 17vw, 264px);
   line-height: .95; letter-spacing: -.02em;
   text-align: center; white-space: nowrap;
   color: var(--ink);
@@ -400,6 +421,7 @@ button { font: inherit; color: inherit; }
 @media (max-width: 560px) {
   .skill-band { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
   .sb-head h3 { margin-top: 6px; font-size: 20px; }
+  .stack-grid { grid-template-columns: 1fr; }
   .work-chip { padding: 8px 13px; font-size: 11.5px; }
   .footer-mid { grid-template-columns: 1fr; gap: 26px; }
   .footer-base { flex-direction: column; align-items: flex-start; gap: 6px; }
