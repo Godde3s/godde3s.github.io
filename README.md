@@ -12,9 +12,9 @@ A deliberately simple, single-page portfolio built with plain HTML, CSS and vani
 
 - Hero — open-to-work tag, "- Interested in learning !!" kicker, "Software .eng && System designer" headline, wolf mascot with pause-motion control
 - In numbers — stats band (repos, projects, languages)
-- Selected work — 14 compact project cards with category filter chips (Backend & APIs / AI & Automation / Apps / Infra & Industrial)
-- Project stories — MacBook slider (kept from the previous design, touch swipe enabled)
-- The toolbox — 8 categorized skill bands: AI-augmented workflow (Claude Code, Hermes, OpenCode), frontend & UI/UX (incl. WordPress), backend & APIs (language stack cards: Python, Node.js, Go, C#), databases, system design, desktop/IoT/industrial, DevOps & cloud (AWS, Cloudflare, Vercel…), learning now (Astro on Cloudflare Workers)
+- Selected work — 15 compact project cards with category filter chips (Backend & APIs / AI & Automation / Apps / Infra & Industrial), including the Usf Resume WordPress plugin
+- Project stories — MacBook slider featuring Hermes Stack (AI agent infra), qwen-free-api (Go), ModbusLite (C# industrial) and Peregrine (React Native - Expo); every slide opens its repository. Touch swipe enabled
+- The toolbox — 8 categorized skill bands: AI-augmented workflow (Claude Code, Hermes, OpenCode, custom AI agents for organizations, RAG pipelines), frontend & UI/UX (incl. WordPress), backend & APIs (language stack cards: Python, Node.js, Go, C#), databases, system design, desktop/IoT/industrial, DevOps & cloud (AWS, Cloudflare, Vercel…), learning now (Astro on Cloudflare Workers)
 - How it works — three steps, AI agent team emphasized
 - Footer — CTA, link columns and a giant USF wordmark
 

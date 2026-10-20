@@ -1,5 +1,5 @@
 /* ============================================================
-   Usf (Godde3s) — v15
+   Usf (Godde3s) — v16
    pause-motion control, reveal-on-scroll, work filters, laptop stories slider.
    ============================================================ */
 (function () {
@@ -80,32 +80,36 @@
 
   var STORIES = [
     {
-      image: 'assets/stories/story-1.webp',
-      srcset: 'assets/stories/story-1-640.webp 640w, assets/stories/story-1.webp 1280w',
+      image: 'assets/stories/story-1.webp?v=19',
+      srcset: 'assets/stories/story-1-640.webp?v=19 640w, assets/stories/story-1.webp?v=19 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-1/'
+      link: 'https://github.com/Godde3s/hermes-stack',
+      alt: 'Hermes Stack — self-hosted AI agent team with model routing and automations'
     },
     {
-      image: 'assets/stories/story-2.webp',
-      srcset: 'assets/stories/story-2-640.webp 640w, assets/stories/story-2.webp 1280w',
+      image: 'assets/stories/story-2.webp?v=19',
+      srcset: 'assets/stories/story-2-640.webp?v=19 640w, assets/stories/story-2.webp?v=19 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-2/'
+      link: 'https://github.com/Godde3s/qwen-free-api',
+      alt: 'qwen-free-api — single Go binary bridging Qwen to OpenAI-compatible clients'
     },
     {
-      image: 'assets/stories/story-3.webp',
-      srcset: 'assets/stories/story-3-640.webp 640w, assets/stories/story-3.webp 1280w',
+      image: 'assets/stories/story-3.webp?v=19',
+      srcset: 'assets/stories/story-3-640.webp?v=19 640w, assets/stories/story-3.webp?v=19 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-3/'
+      link: 'https://github.com/Godde3s/modbuslite',
+      alt: 'ModbusLite — strict Modbus TCP client library for C# / .NET 8'
     },
     {
-      image: 'assets/stories/story-4.webp',
-      srcset: 'assets/stories/story-4-640.webp 640w, assets/stories/story-4.webp 1280w',
+      image: 'assets/stories/story-4.webp?v=19',
+      srcset: 'assets/stories/story-4-640.webp?v=19 640w, assets/stories/story-4.webp?v=19 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://godde3s.github.io/Usf/en/vibe-stories/story-4/'
+      link: 'https://github.com/Godde3s/peregrine',
+      alt: 'Peregrine — React Native - Expo AI console for iOS & Android'
     }
   ];
 
@@ -138,7 +142,7 @@
     img.src = s.image;
     img.srcset = s.srcset;
     img.sizes = '(max-width: 760px) 62vw, 440px';
-    img.alt = 'Story cover';
+    img.alt = s.alt || 'Story cover';
     img.width = 1280;
     img.height = s.imageHeight;
     img.style.objectPosition = s.objectPosition;
