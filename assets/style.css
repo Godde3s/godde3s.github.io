@@ -116,13 +116,27 @@ button { font: inherit; color: inherit; }
 .wolf-stage { position: relative; margin-top: clamp(8px, 2vw, 24px); text-align: center; }
 .wolf-img {
   width: min(640px, 86vw); height: auto; display: inline-block;
-  animation: wolfFloat 7s ease-in-out infinite;
+  animation: wolfFloat 6s ease-in-out infinite;
+  will-change: transform;
+}
+.wolf-stage::after {
+  content: ""; display: block; width: min(380px, 52vw); height: 14px;
+  margin: -2px auto 0; border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(32,30,25,.30), rgba(32,30,25,0) 70%);
+  animation: wolfShadow 6s ease-in-out infinite;
 }
 @keyframes wolfFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(-1.2deg); }
 }
-.motion-off .wolf-img { animation: none; }
+@keyframes wolfShadow {
+  0%, 100% { transform: scaleX(1); opacity: .8; }
+  50% { transform: scaleX(.82); opacity: .4; }
+}
+.motion-off .wolf-img, .motion-off .wolf-stage::after { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .wolf-stage::after { animation: none; }
+}
 
 .motion-btn {
   position: absolute; left: 0; bottom: 6px;
@@ -346,7 +360,11 @@ button { font: inherit; color: inherit; }
 .footer-cta { text-align: center; padding: clamp(56px, 8vw, 100px) 0 clamp(40px, 6vw, 72px); position: relative; }
 .footer-wolf {
   width: clamp(140px, 20vw, 220px); height: auto; opacity: .9;
-  animation: wolfFloat 7s ease-in-out infinite;
+  animation: wolfFloatSoft 7s ease-in-out infinite;
+}
+@keyframes wolfFloatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
 }
 .motion-off .footer-wolf { animation: none; }
 .display-1 {
@@ -412,8 +430,14 @@ button { font: inherit; color: inherit; }
 @media (max-width: 760px) {
   :root { --gutter: 18px; }
   .nav-links { display: none; }
-  .work-grid { grid-template-columns: 1fr; }
-  .work-card { min-height: 0; padding: 13px 38px 12px 16px; }
+  .section { padding: 46px 0 0; }
+  .work-filters { margin-top: 20px; }
+  .work-grid { grid-template-columns: 1fr; margin-top: 10px; }
+  .work-card { min-height: 0; padding: 10px 34px 10px 14px; gap: 3px; }
+  .wc-name { font-size: 16.5px; }
+  .wc-desc { font-size: 12px; line-height: 1.4; -webkit-line-clamp: 1; }
+  .wc-tags { font-size: 10.5px; padding-top: 1px; }
+  .wc-arrow { top: 12px; right: 12px; font-size: 13px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(3) { border-left: 0; }
   .stat:nth-child(n+3) { border-top: 1px solid var(--line); }

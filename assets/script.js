@@ -1,6 +1,7 @@
 /* ============================================================
-   Usf (Godde3s) — v16
-   pause-motion control, reveal-on-scroll, work filters, laptop stories slider.
+   Usf (Godde3s) — v17
+   pause-motion control, reveal-on-scroll, work filters, laptop stories slider,
+   wolf pointer-parallax.
    ============================================================ */
 (function () {
   'use strict';
@@ -57,6 +58,32 @@
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 
+  /* ---------------- wolf pointer parallax ----------------
+     The CSS keyframe float runs on .wolf-img; the pointer adds a
+     gentle layered drift on .wolf-stage. Fully disabled when motion
+     is paused (motion-off) or reduced motion is preferred. */
+  (function () {
+    var stage = document.querySelector('.wolf-stage');
+    if (!stage || !window.matchMedia('(pointer: fine)').matches) return;
+    var raf = null, tx = 0, ty = 0;
+    function apply() {
+      raf = null;
+      stage.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0)';
+    }
+    stage.closest('.hero').addEventListener('mousemove', function (e) {
+      if (root.classList.contains('motion-off')) return;
+      var r = stage.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      tx = ((e.clientX - cx) / Math.max(window.innerWidth, 1)) * 14;
+      ty = ((e.clientY - cy) / Math.max(window.innerHeight, 1)) * 10;
+      if (!raf) raf = window.requestAnimationFrame(apply);
+    });
+    stage.closest('.hero').addEventListener('mouseleave', function () {
+      tx = 0; ty = 0;
+      if (!raf) raf = window.requestAnimationFrame(apply);
+    });
+  })();
+
   /* ---------------- work category filters ---------------- */
   var chips = Array.prototype.slice.call(document.querySelectorAll('.work-chip'));
   var workCards = Array.prototype.slice.call(document.querySelectorAll('.work-card'));
@@ -80,36 +107,36 @@
 
   var STORIES = [
     {
-      image: 'assets/stories/story-1.webp?v=19',
-      srcset: 'assets/stories/story-1-640.webp?v=19 640w, assets/stories/story-1.webp?v=19 1280w',
+      image: 'assets/stories/story-1.webp?v=20',
+      srcset: 'assets/stories/story-1-640.webp?v=20 640w, assets/stories/story-1.webp?v=20 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://github.com/Godde3s/hermes-stack',
-      alt: 'Hermes Stack — self-hosted AI agent team with model routing and automations'
+      link: 'https://github.com/Godde3s/veilchat',
+      alt: 'VeilChat — serverless P2P messenger with end-to-end encryption'
     },
     {
-      image: 'assets/stories/story-2.webp?v=19',
-      srcset: 'assets/stories/story-2-640.webp?v=19 640w, assets/stories/story-2.webp?v=19 1280w',
+      image: 'assets/stories/story-2.webp?v=20',
+      srcset: 'assets/stories/story-2-640.webp?v=20 640w, assets/stories/story-2.webp?v=20 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://github.com/Godde3s/qwen-free-api',
-      alt: 'qwen-free-api — single Go binary bridging Qwen to OpenAI-compatible clients'
+      link: 'https://github.com/Godde3s/whisker',
+      alt: 'Whisker — self-hosted customer conversations platform, Persian/RTL-first, maintained by Usf'
     },
     {
-      image: 'assets/stories/story-3.webp?v=19',
-      srcset: 'assets/stories/story-3-640.webp?v=19 640w, assets/stories/story-3.webp?v=19 1280w',
+      image: 'assets/stories/story-3.webp?v=20',
+      srcset: 'assets/stories/story-3-640.webp?v=20 640w, assets/stories/story-3.webp?v=20 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://github.com/Godde3s/modbuslite',
-      alt: 'ModbusLite — strict Modbus TCP client library for C# / .NET 8'
+      link: 'https://github.com/Godde3s/goftego',
+      alt: 'Goftego — self-hosted realtime chat rooms with WebSocket fan-out and JWT auth'
     },
     {
-      image: 'assets/stories/story-4.webp?v=19',
-      srcset: 'assets/stories/story-4-640.webp?v=19 640w, assets/stories/story-4.webp?v=19 1280w',
+      image: 'assets/stories/story-4.webp?v=20',
+      srcset: 'assets/stories/story-4-640.webp?v=20 640w, assets/stories/story-4.webp?v=20 1280w',
       imageHeight: 959,
       objectPosition: 'center center',
-      link: 'https://github.com/Godde3s/peregrine',
-      alt: 'Peregrine — React Native - Expo AI console for iOS & Android'
+      link: 'https://github.com/Godde3s/anti-treason-bot',
+      alt: 'Anti-Treason Bot — Telegram anti-cheat guard on Cloudflare Workers with 352 tests'
     }
   ];
 
