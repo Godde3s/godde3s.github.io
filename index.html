@@ -476,34 +476,38 @@ var CATS = {
     {
       image: 'assets/stories/story-1.webp?v=20',
       srcset: 'assets/stories/story-1-640.webp?v=20 640w, assets/stories/story-1.webp?v=20 1280w',
+      imageWidth: 1280,
       imageHeight: 959,
       objectPosition: 'center center',
       link: 'https://github.com/Godde3s/veilchat',
       alt: 'VeilChat — serverless P2P messenger with end-to-end encryption'
     },
     {
-      image: 'assets/stories/story-2.webp?v=20',
-      srcset: 'assets/stories/story-2-640.webp?v=20 640w, assets/stories/story-2.webp?v=20 1280w',
-      imageHeight: 959,
+      image: 'assets/stories/story-2.webp?v=21',
+      srcset: 'assets/stories/story-2-640.webp?v=21 640w, assets/stories/story-2.webp?v=21 1824w',
+      imageWidth: 1824,
+      imageHeight: 1376,
       objectPosition: 'center center',
-      link: 'https://github.com/Godde3s/whisker',
-      alt: 'Whisker — self-hosted customer conversations platform, Persian/RTL-first, maintained by Usf'
+      link: 'https://github.com/Godde3s/peregrine',
+      alt: 'Peregrine — Streaming AI console for iOS & Android, built to a native design bar'
     },
     {
-      image: 'assets/stories/story-3.webp?v=20',
-      srcset: 'assets/stories/story-3-640.webp?v=20 640w, assets/stories/story-3.webp?v=20 1280w',
-      imageHeight: 959,
+      image: 'assets/stories/story-3.webp?v=21',
+      srcset: 'assets/stories/story-3-640.webp?v=21 640w, assets/stories/story-3.webp?v=21 1824w',
+      imageWidth: 1824,
+      imageHeight: 1376,
       objectPosition: 'center center',
-      link: 'https://github.com/Godde3s/goftego',
-      alt: 'Goftego — self-hosted realtime chat rooms with WebSocket fan-out and JWT auth'
+      link: 'https://github.com/Godde3s/hermes-stack',
+      alt: 'Hermes Stack — AI server that routes models, schedules jobs & automations'
     },
     {
-      image: 'assets/stories/story-4.webp?v=20',
-      srcset: 'assets/stories/story-4-640.webp?v=20 640w, assets/stories/story-4.webp?v=20 1280w',
-      imageHeight: 959,
+      image: 'assets/stories/story-4.webp?v=21',
+      srcset: 'assets/stories/story-4-640.webp?v=21 640w, assets/stories/story-4.webp?v=21 1824w',
+      imageWidth: 1824,
+      imageHeight: 1376,
       objectPosition: 'center center',
-      link: 'https://github.com/Godde3s/anti-treason-bot',
-      alt: 'Anti-Treason Bot — Telegram anti-cheat guard on Cloudflare Workers with 352 tests'
+      link: 'https://github.com/Godde3s/netpilot',
+      alt: 'NetPilot — Network autopilot, single-binary edge tooling & tunnels'
     }
   ];
 
@@ -537,7 +541,7 @@ var CATS = {
     img.srcset = s.srcset;
     img.sizes = '(max-width: 760px) 62vw, 440px';
     img.alt = s.alt || 'Story cover';
-    img.width = 1280;
+    img.width = s.imageWidth || 1280;
     img.height = s.imageHeight;
     img.style.objectPosition = s.objectPosition;
     img.loading = 'lazy';
