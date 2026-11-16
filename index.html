@@ -1,494 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Usf – A programer</title>
-  <meta name="description" content="Usf (Godde3s) — software engineer && system designer running an AI agent team (Claude Code, OpenCode, Hermes). Apps, APIs, industrial automation — and custom AI agents with RAG for organizations.">
-  <link rel="canonical" href="https://godde3s.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Usf – A programer">
-  <meta property="og:description" content="Web, mobile & desktop apps, APIs, databases, system design, networking, IoT — plus custom AI agents with RAG for organizations. One engineer + an AI agent team.">
-  <link rel="canonical" href="https://godde3s.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Usf – A programer">
-  <meta property="og:description" content="Web, mobile & desktop apps, APIs, databases, system design, networking, IoT — designed, built and shipped end-to-end by one engineer + an AI agent team.">
-  <meta property="og:url" content="https://godde3s.github.io/">
-  <meta property="og:image" content="https://godde3s.github.io/assets/avatar.jpg">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=20">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Usf – A programer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #F2F2F7;
+    --card: #FFFFFF;
+    --label: #000000;
+    --secondary: #6D6D72;
+    --tertiary: #8E8E93;
+    --separator: #C6C6C8;
+    --blue: #007AFF;
+    --green: #34C759;
+    --radius: 12px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--label);
+    -webkit-font-smoothing: antialiased;
+  }
+  .col { max-width: 430px; margin: 0 auto; padding: 0 16px 48px; }
+
+  /* Large Title nav */
+  .nav { padding: 28px 4px 8px; }
+  .nav .eyebrow { font-size: 13px; font-weight: 600; color: var(--secondary); letter-spacing: .02em; }
+  .nav h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-top: 2px; }
+  .nav .sub { font-size: 17px; color: var(--secondary); margin-top: 4px; }
+
+  /* Profile card */
+  .card { background: var(--card); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(0,0,0,.06); overflow: hidden; margin-top: 16px; }
+  .profile { display: flex; align-items: center; gap: 14px; padding: 16px; }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; background: #E5E5EA; flex-shrink: 0; }
+  .profile .name { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+  .profile .role { font-size: 15px; color: var(--secondary); margin-top: 2px; line-height: 1.35; }
+  .avail { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--green); }
+  .avail .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .profile .chev { margin-left: auto; color: var(--tertiary); font-size: 20px; font-weight: 600; }
+
+  /* Stats strip */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+  .stats .cell { padding: 14px 4px; }
+  .stats .cell + .cell { border-left: 1px solid rgba(60,60,67,.12); }
+  .stats .num { font-size: 20px; font-weight: 700; }
+  .stats .lbl { font-size: 11px; color: var(--secondary); margin-top: 2px; }
+
+  /* Section header */
+  .sec-head { font-size: 13px; font-weight: 400; color: var(--secondary); text-transform: uppercase; letter-spacing: .02em; padding: 24px 4px 8px; }
+
+  /* Grouped list */
+  .list .row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; text-decoration: none; color: inherit; }
+  .list .row + .row { border-top: 1px solid rgba(60,60,67,.12); }
+  .list .row:active { background: #F2F2F7; }
+  .icon { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; color: #fff; }
+  .row .t { flex: 1; min-width: 0; }
+  .row .t .a { font-size: 17px; }
+  .row .t .b { font-size: 14px; color: var(--secondary); margin-top: 1px; line-height: 1.35; }
+  .row .chev { color: var(--tertiary); font-size: 18px; font-weight: 600; flex-shrink: 0; }
+  .badge { font-size: 13px; color: var(--secondary); background: #F2F2F7; padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
+
+  /* Featured project */
+  .feat { padding: 16px; }
+  .feat img { width: 100%; border-radius: 8px; display: block; }
+  .feat h3 { font-size: 20px; font-weight: 700; margin-top: 12px; letter-spacing: -0.01em; }
+  .feat p { font-size: 15px; color: var(--secondary); line-height: 1.45; margin-top: 4px; }
+  .feat .link { display: inline-block; margin-top: 10px; color: var(--blue); font-size: 15px; font-weight: 600; text-decoration: none; }
+
+  /* Steps */
+  .step { display: flex; gap: 12px; padding: 14px 16px; }
+  .step + .step { border-top: 1px solid rgba(60,60,67,.12); }
+  .step .n { width: 26px; height: 26px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step h4 { font-size: 17px; font-weight: 600; }
+  .step p { font-size: 14px; color: var(--secondary); line-height: 1.45; margin-top: 2px; }
+
+  .foot { text-align: center; font-size: 13px; color: var(--tertiary); padding: 28px 16px 0; }
+  .foot a { color: var(--blue); text-decoration: none; }
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<div class="col">
 
-<header class="nav" id="nav">
-  <div class="container nav-inner">
-    <a class="brand" href="#top" aria-label="Usf — home">
-      <span class="brand-mark" aria-hidden="true">U</span>
-      <span class="brand-text">Usf</span>
-    </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#stories">Stories</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a class="nav-gh mono" href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+  <div class="nav">
+    <div class="eyebrow">PORTFOLIO</div>
+    <h1>Usf</h1>
+    <div class="sub">A programer — software engineer &amp; system designer</div>
   </div>
-</header>
 
-<main id="main">
-  <!-- ============ HERO — fenrir editorial ============ -->
-  <section class="hero" id="top">
-    <div class="container">
-      <div class="hero-eyebrow mono reveal">
-        <span class="new-tag">Open to work</span>
-        <span class="eyebrow-right">freelance &amp; full-time</span>
-      </div>
-
-      <h1 class="display reveal"><span class="h1-kicker mono">- Interested in learning !!</span>Software .eng &amp;&amp;<br>System designer</h1>
-      <p class="byline reveal">By Usf&nbsp;&nbsp;-&nbsp;&nbsp;<a href="#work">See work&nbsp;&darr;</a></p>
-
-      <div class="wolf-stage reveal">
-        <img class="wolf-img" src="assets/wolf.webp" alt="Line-art wolf — the Fenrir-inspired mascot of this portfolio" width="1136" height="1058" decoding="async">
-        <button class="motion-btn mono" id="motionBtn" type="button" aria-pressed="false">
-          <span class="mb-on">Pause motion</span><span class="mb-off">Play motion</span>
-        </button>
-      </div>
+  <div class="card profile">
+    <img class="avatar" src="assets/wolf.webp" alt="Usf — wolf mascot">
+    <div>
+      <div class="name">Usf</div>
+      <div class="role">Interested in learning — Software .eng &amp;&amp; System designer</div>
+      <div class="avail"><span class="dot"></span>Open to work — freelance &amp; full-time</div>
     </div>
+    <div class="chev">›</div>
+  </div>
 
-    <div class="stats-band">
-      <div class="container stats-grid">
-        <div class="stat reveal"><strong>30</strong><span>public repos</span></div>
-        <div class="stat reveal"><strong>17</strong><span>linked projects</span></div>
-        <div class="stat reveal"><strong>3<i>+</i></strong><span>languages</span></div>
-        <div class="stat reveal"><strong>2025</strong><span>shipping since</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SELECTED WORK ============ -->
-  <section class="section" id="work">
-    <div class="container">
-      <header class="section-head reveal">
-        <h2 class="display-2">One person, shipping like a team.</h2>
-        <p class="section-sub">Seventeen public builds across frontend, APIs, AI, apps and industrial — filter by what you need.</p>
-      </header>
-
-      <div class="work-filters reveal" role="group" aria-label="Filter projects by category">
-        <button class="work-chip is-active" type="button" data-filter="all">All <span>17</span></button>
-        <button class="work-chip" type="button" data-filter="web">Frontend &amp; Web <span>2</span></button>
-        <button class="work-chip" type="button" data-filter="api">Backend &amp; APIs <span>7</span></button>
-        <button class="work-chip" type="button" data-filter="ai">AI &amp; Automation <span>3</span></button>
-        <button class="work-chip" type="button" data-filter="apps">Apps <span>3</span></button>
-        <button class="work-chip" type="button" data-filter="infra">Infra &amp; Industrial <span>2</span></button>
-      </div>
-
-      <div class="work-grid">
-        <a class="work-card reveal" data-cat="apps" href="https://github.com/Godde3s/peregrine" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">01</span><span class="wc-cat">Mobile app</span></span>
-          <span class="wc-name">Peregrine</span>
-          <span class="wc-desc">Streaming AI console for iOS &amp; Android, built to a native design bar</span>
-          <span class="wc-tags mono">React Native - Expo - Streaming</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="api" href="https://github.com/Godde3s/taskflow-api" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">02</span><span class="wc-cat">Backend API</span></span>
-          <span class="wc-name">TaskFlow API</span>
-          <span class="wc-desc">Production FastAPI backend — every security claim backed by a test</span>
-          <span class="wc-tags mono">Python - FastAPI - Auth</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="api" href="https://github.com/Godde3s/veilchat" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">03</span><span class="wc-cat">Realtime backend</span></span>
-          <span class="wc-name">VeilChat</span>
-          <span class="wc-desc">End-to-end encrypted realtime chat, self-hostable</span>
-          <span class="wc-tags mono">Python - E2E encryption - WebSockets</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="ai" href="https://github.com/Godde3s/textsense" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">04</span><span class="wc-cat">AI &amp; NLP</span></span>
-          <span class="wc-name">TextSense</span>
-          <span class="wc-desc">NLP service for text analysis and classification</span>
-          <span class="wc-tags mono">Python - NLP - Classification</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="api" href="https://github.com/Godde3s/goftego" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">05</span><span class="wc-cat">Realtime backend</span></span>
-          <span class="wc-name">Goftego</span>
-          <span class="wc-desc">Realtime chat rooms you self-host in one command</span>
-          <span class="wc-tags mono">JavaScript - Realtime - Self-host</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="ai" href="https://github.com/Godde3s/hermes-stack" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">06</span><span class="wc-cat">AI infra</span></span>
-          <span class="wc-name">Hermes Stack</span>
-          <span class="wc-desc">AI server that routes models, schedules jobs &amp; automations</span>
-          <span class="wc-tags mono">Python - LLM routing - Jobs</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="api" href="https://github.com/Godde3s/omnirouter" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">07</span><span class="wc-cat">AI gateway</span></span>
-          <span class="wc-name">OmniRouter</span>
-          <span class="wc-desc">One OpenAI-compatible API in front of many models</span>
-          <span class="wc-tags mono">Go - OpenAI-compatible - Routing</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="api" href="https://github.com/Godde3s/glm-free-api" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">08</span><span class="wc-cat">AI gateway</span></span>
-          <span class="wc-name">GLM Free API</span>
-          <span class="wc-desc">OpenAI-compatible bridge for GLM models</span>
-          <span class="wc-tags mono">Go - REST - Bridge</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="infra" href="https://github.com/Godde3s/netpilot" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">09</span><span class="wc-cat">Network edge</span></span>
-          <span class="wc-name">NetPilot</span>
-          <span class="wc-desc">Network autopilot — single-binary edge tooling &amp; tunnels</span>
-          <span class="wc-tags mono">Go - Tunnels - Edge</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="api" href="https://github.com/Godde3s/snaplink" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">10</span><span class="wc-cat">Web tooling</span></span>
-          <span class="wc-name">Snaplink</span>
-          <span class="wc-desc">Fast link tooling with a clean API surface</span>
-          <span class="wc-tags mono">TypeScript - API design</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="apps" href="https://github.com/Godde3s/habitgrid" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">11</span><span class="wc-cat">Mobile app</span></span>
-          <span class="wc-name">HabitGrid</span>
-          <span class="wc-desc">Cross-platform habit tracker from one Expo codebase</span>
-          <span class="wc-tags mono">React Native - Expo - Cross-platform</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="api" href="https://github.com/Godde3s/postman-api-testing-toolkit" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">12</span><span class="wc-cat">API testing</span></span>
-          <span class="wc-name">Postman Toolkit</span>
-          <span class="wc-desc">Layered API contract testing for Postman &amp; Newman</span>
-          <span class="wc-tags mono">Postman - Newman - Contracts</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="ai" href="https://github.com/Godde3s/baleforge" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">13</span><span class="wc-cat">Automation</span></span>
-          <span class="wc-name">BaleForge</span>
-          <span class="wc-desc">Automation toolkit for the Bale messenger platform</span>
-          <span class="wc-tags mono">Python - Bots - Automation</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="infra" href="https://github.com/Godde3s/modbuslite" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">14</span><span class="wc-cat">Industrial</span></span>
-          <span class="wc-name">ModbusLite</span>
-          <span class="wc-desc">Lightweight Modbus TCP library for industrial links</span>
-          <span class="wc-tags mono">C# - Modbus TCP - Industrial</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="apps" href="https://github.com/Godde3s/usf-resume" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">15</span><span class="wc-cat">WordPress plugin</span></span>
-          <span class="wc-name">Usf Resume</span>
-          <span class="wc-desc">WordPress résumé/CV plugin - settings page, [usf_resume] shortcode, schema.org JSON-LD</span>
-          <span class="wc-tags mono">PHP - WordPress - Shortcodes</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="web" href="https://github.com/Godde3s/godde3s.github.io" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">16</span><span class="wc-cat">Frontend &amp; web</span></span>
-          <span class="wc-name">This Portfolio</span>
-          <span class="wc-desc">The site you are on — hand-rolled HTML, CSS &amp; vanilla JS, zero templates</span>
-          <span class="wc-tags mono">HTML - CSS - Vanilla JS</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="work-card reveal" data-cat="web" href="https://github.com/Godde3s/fa-guides" target="_blank" rel="noopener">
-          <span class="wc-top mono"><span class="wc-idx">17</span><span class="wc-cat">Frontend &amp; web</span></span>
-          <span class="wc-name">fa-guides</span>
-          <span class="wc-desc">Persian RTL interactive guides with a built-in self-quiz — no framework</span>
-          <span class="wc-tags mono">HTML - RTL - Interactive</span>
-          <span class="wc-arrow" aria-hidden="true">↗</span>
-        </a>
-      </div>
-
-      <p class="work-more reveal"><a class="ghost-link mono" href="https://github.com/Godde3s?tab=repositories" target="_blank" rel="noopener">View all repositories&nbsp;↗</a></p>
-    </div>
-  </section>
-
-  <!-- ============ STORIES — laptop (kept) ============ -->
-  <section class="stories-section" id="stories">
-    <div class="vibe-stories-container" id="vibeStories">
-      <div class="section-header">
-        <h2 class="display-2">Real projects,<br><em>built in public.</em></h2>
-        <p class="section-sub">Every card opens a working repository.</p>
-      </div>
-
-      <div class="laptop-wrapper">
-        <div class="laptop-container">
-          <button class="nav-btn prev" type="button" aria-label="Previous story">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
-          </button>
-          <button class="nav-btn next" type="button" aria-label="Next story">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          </button>
-
-          <div class="screen-content" style="--screen-left:10%; --screen-top:1.5%; --screen-width:80%; --screen-height:87.5%">
-            <a href="https://github.com/Godde3s/veilchat" target="_blank" rel="noopener" class="screen-link">
-              <div class="screen-image-wrapper">
-                <img
-                  src="assets/stories/story-1.webp?v=20"
-                  srcset="assets/stories/story-1-640.webp?v=20 640w, assets/stories/story-1.webp?v=20 1280w"
-                  sizes="(max-width: 760px) 62vw, 440px"
-                  class="screen-image"
-                  style="object-position: center center"
-                  alt="VeilChat — serverless P2P messenger with end-to-end encryption"
-                  width="1280"
-                  height="959"
-                  loading="lazy"
-                  decoding="async"
-                  fetchpriority="low"
-                />
-              </div>
-            </a>
-          </div>
-
-          <img
-            src="assets/stories/macbook-frame.webp"
-            class="laptop-frame"
-            alt="MacBook frame"
-            width="1400"
-            height="813"
-            loading="lazy"
-            decoding="async"
-            fetchpriority="low"
-          />
-        </div>
-
-        <div class="indicators">
-          <button class="indicator-dot active" type="button" aria-label="Select story"></button>
-          <button class="indicator-dot" type="button" aria-label="Select story"></button>
-          <button class="indicator-dot" type="button" aria-label="Select story"></button>
-          <button class="indicator-dot" type="button" aria-label="Select story"></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SKILLS ============ -->
-  <section class="section section-soft" id="skills">
-    <div class="container">
-      <header class="section-head reveal">
-        <h2 class="display-2">The toolbox.</h2>
-        <p class="section-sub">The whole stack, one engineer + an AI agent team — <strong>dark pills</strong> are what the market asks for most. Not boxed into one tool, one language or one layer.</p>
-        <p class="skill-langs mono">Core: TypeScript - Python - Go - C# — also C, PHP, SQL</p>
-      </header>
-
-      <div class="skill-bands">
-        <article class="skill-band reveal">
-          <div class="sb-head">
-            <span class="sb-idx mono">01</span>
-            <h3>AI-augmented workflow</h3>
-            <p class="sb-note">one engineer + an agent team</p>
-          </div>
-          <ul class="sb-pills">
-            <li class="pill is-hot">Claude Code</li>
-            <li class="pill is-hot">Hermes agent</li>
-            <li class="pill is-hot">OpenCode</li>
-            <li class="pill is-hot">Custom AI agents for organizations</li>
-            <li class="pill is-hot">RAG — private data pipelines</li>
-            <li class="pill">Codex CLI</li>
-            <li class="pill">Agent-team orchestration</li>
-            <li class="pill">Human-reviewed diffs</li>
-          </ul>
-        </article>
-
-        <article class="skill-band reveal">
-          <div class="sb-head">
-            <span class="sb-idx mono">02</span>
-            <h3>Frontend &amp; UI/UX</h3>
-            <p class="sb-note">screens that feel designed</p>
-          </div>
-          <ul class="sb-pills">
-            <li class="pill is-hot">React &amp; Next.js</li>
-            <li class="pill is-hot">JavaScript - TypeScript</li>
-            <li class="pill is-hot">React Native - Expo</li>
-            <li class="pill is-hot">HTML &amp; CSS — RTL-first</li>
-            <li class="pill is-hot">WordPress - themes &amp; plugins</li>
-            <li class="pill is-hot">Responsive &amp; accessible</li>
-            <li class="pill">Tailwind - VitePress</li>
-            <li class="pill">Figma &amp; UI/UX design<span class="pill-new mono">new</span></li>
-          </ul>
-        </article>
-
-        <article class="skill-band reveal">
-          <div class="sb-head">
-            <span class="sb-idx mono">03</span>
-            <h3>Backend &amp; APIs</h3>
-            <p class="sb-note">runtime first — frameworks second</p>
-          </div>
-          <div class="stack-wrap">
-            <div class="stack-grid">
-              <div class="stack-card is-hot"><span class="stack-name">Python</span><span class="stack-sub mono">FastAPI + Flask + REST APIs</span></div>
-              <div class="stack-card is-hot"><span class="stack-name">Node.js</span><span class="stack-sub mono">Express + TypeScript services</span></div>
-              <div class="stack-card is-hot"><span class="stack-name">Go</span><span class="stack-sub mono">net/http + single-binary APIs</span></div>
-              <div class="stack-card is-hot"><span class="stack-name">C#</span><span class="stack-sub mono">.NET + Modbus TCP libraries</span></div>
-            </div>
-            <ul class="sb-pills">
-              <li class="pill">JWT auth &amp; security</li>
-              <li class="pill">E2E encryption</li>
-              <li class="pill">OpenAI-compatible APIs</li>
-              <li class="pill">LLM infra — routing, agents, SSE</li>
-            </ul>
-            <p class="stack-more mono">More API tech: REST - GraphQL - gRPC - WebSockets - OpenAPI specs</p>
-          </div>
-        </article>
-
-        <article class="skill-band reveal">
-          <div class="sb-head">
-            <span class="sb-idx mono">04</span>
-            <h3>Databases &amp; data</h3>
-            <p class="sb-note">modeled to last</p>
-          </div>
-          <ul class="sb-pills">
-            <li class="pill is-hot">SQL &amp; query design</li>
-            <li class="pill is-hot">PostgreSQL - MySQL - SQLite</li>
-            <li class="pill is-hot">NoSQL - MongoDB &amp; key-value stores</li>
-            <li class="pill is-hot">ORMs — SQLAlchemy &amp; EF Core</li>
-            <li class="pill is-hot">Data modeling &amp; migrations</li>
-          </ul>
-        </article>
-
-        <article class="skill-band reveal">
-          <div class="sb-head">
-            <span class="sb-idx mono">05</span>
-            <h3>System design</h3>
-            <p class="sb-note">from idea to blueprint</p>
-          </div>
-          <ul class="sb-pills">
-            <li class="pill is-hot">End-to-end system design</li>
-            <li class="pill">Clean &amp; layered architecture</li>
-            <li class="pill">Design patterns</li>
-            <li class="pill">Caching &amp; performance</li>
-            <li class="pill">Scalable service design</li>
-          </ul>
-        </article>
-
-        <article class="skill-band reveal">
-          <div class="sb-head">
-            <span class="sb-idx mono">06</span>
-            <h3>Desktop, IoT &amp; industrial</h3>
-            <p class="sb-note">beyond the browser</p>
-          </div>
-          <ul class="sb-pills">
-            <li class="pill is-hot">Tauri &amp; Electron apps</li>
-            <li class="pill is-hot">PLC — LD &amp; ST (IEC 61131-3)</li>
-            <li class="pill">Modbus TCP - SCADA</li>
-            <li class="pill">IoT &amp; device bridges</li>
-          </ul>
-        </article>
-
-        <article class="skill-band reveal">
-          <div class="sb-head">
-            <span class="sb-idx mono">07</span>
-            <h3>DevOps, cloud &amp; tools</h3>
-            <p class="sb-note">ships and stays shipped</p>
-          </div>
-          <ul class="sb-pills">
-            <li class="pill is-hot">Docker &amp; CI/CD</li>
-            <li class="pill is-hot">AWS</li>
-            <li class="pill">Cloudflare Workers &amp; Pages</li>
-            <li class="pill">Vercel</li>
-            <li class="pill">Railway - Render - Fly.io - Koyeb</li>
-            <li class="pill is-hot">Git &amp; GitHub workflows</li>
-            <li class="pill">pytest - Postman - Newman</li>
-            <li class="pill">Networking — TCP/IP, tunnels, edge</li>
-          </ul>
-        </article>
-
-        <article class="skill-band reveal">
-          <div class="sb-head">
-            <span class="sb-idx mono">08</span>
-            <h3>Learning now</h3>
-            <p class="sb-note">always mid-climb</p>
-          </div>
-          <ul class="sb-pills">
-            <li class="pill is-learning">Astro on Cloudflare Workers<span class="pill-new mono">learning</span></li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROCESS ============ -->
-  <section class="section" id="process">
-    <div class="container">
-      <header class="section-head reveal">
-        <h2 class="display-2">Three steps, no agency overhead.</h2>
-        <p class="section-sub">Powered by an AI agent team — Hermes, Claude Code, OpenCode, Codex — with a human review on every diff. For organizations I also design &amp; deploy <strong>private AI agents with RAG</strong> over your own data — on your infrastructure.</p>
-      </header>
-      <ol class="steps-grid">
-        <li class="step reveal">
-          <span class="step-n mono">01</span>
-          <h3>You bring the idea</h3>
-          <p>A repo, a spec, or one paragraph is enough — we scope it into a shippable first cut.</p>
-        </li>
-        <li class="step reveal">
-          <span class="step-n mono">02</span>
-          <h3>AI-built, human-reviewed</h3>
-          <p>I direct an AI agent team — Hermes, Claude Code, OpenCode, Codex — orchestrating every task and reviewing every diff myself. Docs, tests and CI land with the code.</p>
-        </li>
-        <li class="step reveal">
-          <span class="step-n mono">03</span>
-          <h3>You get a running system</h3>
-          <p>Deployed, monitored and documented — ready to hand over or keep evolving.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer class="footer" id="contact">
-  <div class="container">
-    <div class="footer-cta reveal">
-      <img class="footer-wolf" src="assets/wolf.webp" alt="" aria-hidden="true" width="300" height="279">
-      <h2 class="display-1">Have something<br>to build?</h2>
-      <p class="footer-cta-sub">Open to freelance &amp; full-time — let&rsquo;s ship it together.</p>
-      <div class="cta-row">
-        <a class="btn-ink" href="https://github.com/Godde3s" target="_blank" rel="noopener">Hire me on GitHub</a>
-        <a class="btn-line" href="https://godde3s.github.io/Usf/" target="_blank" rel="noopener">Read the full story&nbsp;↗</a>
-      </div>
-    </div>
-
-    <div class="footer-mid">
-      <nav class="f-col" aria-label="Elsewhere">
-        <h4 class="mono">Elsewhere</h4>
-        <a href="https://github.com/Godde3s" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://godde3s.github.io/Usf/" target="_blank" rel="noopener">Long-form portfolio</a>
-        <a href="https://github.com/Godde3s/usf-resume" target="_blank" rel="noopener">WordPress résumé plugin</a>
-      </nav>
-      <nav class="f-col" aria-label="On this page">
-        <h4 class="mono">On this page</h4>
-        <a href="#work">Selected work</a>
-        <a href="#stories">Laptop stories</a>
-        <a href="#skills">Skills</a>
-      </nav>
-      <div class="f-col">
-        <h4 class="mono">Status</h4>
-        <p><span class="status-dot" aria-hidden="true"></span>Open to work — 2026</p>
-        <p>Iran - UTC+3:30 - async-first</p>
-        <p>everything runs - MIT licensed</p>
-      </div>
+  <div class="card" style="margin-top:12px">
+    <div class="stats">
+      <div class="cell"><div class="num">30</div><div class="lbl">public repos</div></div>
+      <div class="cell"><div class="num">17</div><div class="lbl">linked projects</div></div>
+      <div class="cell"><div class="num">3+</div><div class="lbl">languages</div></div>
+      <div class="cell"><div class="num">2025</div><div class="lbl">shipping since</div></div>
     </div>
   </div>
 
-  <div class="footer-wordmark" aria-hidden="true">USF</div>
-
-  <div class="container footer-base">
-    <p>&copy; <span id="year">2026</span> Usf (Godde3s)</p>
-    <p class="mono footer-dim">designed &amp; built from scratch — no templates</p>
-    <a class="to-top mono" href="#top">Back to top&nbsp;&uarr;</a>
+  <div class="sec-head">Featured project</div>
+  <div class="card feat">
+    <img src="assets/stories/macbook-frame.webp" alt="VeilChat">
+    <h3>VeilChat</h3>
+    <p>Serverless P2P messenger with end-to-end encryption.</p>
+    <a class="link" href="https://github.com/Godde3s">View on GitHub ›</a>
   </div>
-</footer>
 
-<script src="assets/script.js?v=17"></script>
+  <div class="sec-head">What I do</div>
+  <div class="card list">
+    <div class="row"><div class="icon" style="background:#AF52DE">✦</div><div class="t"><div class="a">AI-augmented workflow</div><div class="b">One engineer + an agent team — Claude Code, Hermes, OpenCode, RAG, Codex</div></div><div class="chev">›</div></div>
+    <div class="row"><div class="icon" style="background:#007AFF">◐</div><div class="t"><div class="a">Frontend &amp; UI/UX</div><div class="b">React, Next.js, React Native, Expo — screens that feel designed</div></div><div class="chev">›</div></div>
+    <div class="row"><div class="icon" style="background:#34C759">{ }</div><div class="t"><div class="a">Backend &amp; APIs</div><div class="b">Python FastAPI, Node.js, Go, .NET — runtime first, frameworks second</div></div><div class="chev">›</div></div>
+    <div class="row"><div class="icon" style="background:#FF9500">▦</div><div class="t"><div class="a">Databases &amp; data</div><div class="b">PostgreSQL, MySQL, SQLite, MongoDB — modeled to last</div></div><div class="chev">›</div></div>
+    <div class="row"><div class="icon" style="background:#5856D6">⌘</div><div class="t"><div class="a">System design</div><div class="b">End-to-end design, clean architecture, caching &amp; performance</div></div><div class="chev">›</div></div>
+    <div class="row"><div class="icon" style="background:#FF2D55">⌁</div><div class="t"><div class="a">Desktop, IoT &amp; industrial</div><div class="b">Tauri, Electron, PLC, Modbus TCP, SCADA — beyond the browser</div></div><div class="chev">›</div></div>
+    <div class="row"><div class="icon" style="background:#5AC8FA">⬢</div><div class="t"><div class="a">DevOps, cloud &amp; tools</div><div class="b">Docker, CI/CD, AWS, Cloudflare, Vercel — ships and stays shipped</div></div><div class="chev">›</div></div>
+    <div class="row"><div class="icon" style="background:#8E8E93">↗</div><div class="t"><div class="a">Learning now</div><div class="b">Astro on Cloudflare Workers — always mid-climb</div></div><span class="badge">now</span></div>
+  </div>
+
+  <div class="sec-head">How we work together</div>
+  <div class="card">
+    <div class="step"><div class="n">1</div><div><h4>You bring the idea</h4><p>A repo, a spec, or one paragraph is enough — we scope it into a shippable first cut.</p></div></div>
+    <div class="step"><div class="n">2</div><div><h4>AI-built, human-reviewed</h4><p>I direct an AI agent team and review every diff myself. Docs, tests and CI land with the code.</p></div></div>
+    <div class="step"><div class="n">3</div><div><h4>You get a running system</h4><p>Deployed, monitored and documented — ready to hand over or keep evolving.</p></div></div>
+  </div>
+
+  <div class="sec-head">Links</div>
+  <div class="card list">
+    <a class="row" href="https://github.com/Godde3s"><div class="icon" style="background:#000">⌥</div><div class="t"><div class="a">All repositories</div><div class="b">github.com/Godde3s — 30 public repos</div></div><div class="chev">›</div></a>
+  </div>
+
+  <div class="foot">Usf — A programer · <a href="https://godde3s.github.io/">godde3s.github.io</a><br>iOS-style preview — not live yet</div>
+
+</div>
 </body>
 </html>
