@@ -4,102 +4,218 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Usf – A programer</title>
+<meta name="description" content="Usf (Godde3s) — software engineer && system designer. Web, mobile & desktop apps, APIs, databases, system design, networking, IoT — plus custom AI agents with RAG.">
+<link rel="canonical" href="https://godde3s.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Usf – A programer">
+<meta property="og:description" content="Web, mobile & desktop apps, APIs, databases, system design, networking, IoT — designed, built and shipped end-to-end.">
+<meta property="og:url" content="https://godde3s.github.io/">
+<meta property="og:image" content="https://godde3s.github.io/assets/avatar.jpg">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   :root {
-    --bg: #F2F2F7;
-    --card: #FFFFFF;
-    --label: #000000;
-    --secondary: #6D6D72;
-    --tertiary: #8E8E93;
-    --separator: #C6C6C8;
-    --blue: #007AFF;
-    --green: #34C759;
-    --radius: 12px;
+    --bg: #F2F2F7; --card: #FFFFFF; --label: #000000;
+    --secondary: #6D6D72; --tertiary: #8E8E93;
+    --separator: rgba(60,60,67,.12);
+    --blue: #007AFF; --green: #34C759; --radius: 12px;
+    /* laptop vars (from the old portfolio, kept verbatim) */
+    --wrap: 760px; --gutter: 16px; --accent: #007AFF; --ink: #000000;
+    --paper: #FFFFFF; --line: rgba(60,60,67,.12); --muted: #6D6D72;
+  }
+  html.dark {
+    --bg: #000000; --card: #1C1C1E; --label: #FFFFFF;
+    --secondary: #98989D; --tertiary: #636366;
+    --separator: rgba(255,255,255,.14);
+    --blue: #0A84FF; --green: #30D158;
+    --accent: #0A84FF; --ink: #FFFFFF;
+    --paper: #1C1C1E; --line: rgba(255,255,255,.14); --muted: #98989D;
   }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg);
-    color: var(--label);
+    background: var(--bg); color: var(--label);
     -webkit-font-smoothing: antialiased;
+    transition: background .25s ease, color .25s ease;
   }
-  .col { max-width: 430px; margin: 0 auto; padding: 0 16px 48px; }
+  .col { max-width: 430px; margin: 0 auto; padding: 0 16px 40px; }
 
-  /* Large Title nav */
-  .nav { padding: 28px 4px 8px; }
-  .nav .eyebrow { font-size: 13px; font-weight: 600; color: var(--secondary); letter-spacing: .02em; }
-  .nav h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-top: 2px; }
-  .nav .sub { font-size: 17px; color: var(--secondary); margin-top: 4px; }
+  /* top bar */
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 0; }
+  .topbar .brand { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .theme-btn {
+    width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
+    background: var(--card); color: var(--label); font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,.08);
+  }
 
-  /* Profile card */
-  .card { background: var(--card); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(0,0,0,.06); overflow: hidden; margin-top: 16px; }
-  .profile { display: flex; align-items: center; gap: 14px; padding: 16px; }
-  .avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; background: #E5E5EA; flex-shrink: 0; }
-  .profile .name { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
-  .profile .role { font-size: 15px; color: var(--secondary); margin-top: 2px; line-height: 1.35; }
-  .avail { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--green); }
-  .avail .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-  .profile .chev { margin-left: auto; color: var(--tertiary); font-size: 20px; font-weight: 600; }
+  /* compact profile */
+  .nav { padding: 18px 4px 0; }
+  .nav h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+  .nav .sub { font-size: 15px; color: var(--secondary); margin-top: 3px; }
+  .card { background: var(--card); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(0,0,0,.06); overflow: hidden; margin-top: 12px; transition: background .25s ease; }
+  .profile { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+  .avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; background: #E5E5EA; flex-shrink: 0; }
+  .profile .name { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+  .profile .role { font-size: 13.5px; color: var(--secondary); margin-top: 1px; }
+  .avail { display: inline-flex; align-items: center; gap: 5px; margin-top: 5px; font-size: 12px; font-weight: 600; color: var(--green); }
+  .avail .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
 
-  /* Stats strip */
+  /* compact stats */
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
-  .stats .cell { padding: 14px 4px; }
-  .stats .cell + .cell { border-left: 1px solid rgba(60,60,67,.12); }
-  .stats .num { font-size: 20px; font-weight: 700; }
-  .stats .lbl { font-size: 11px; color: var(--secondary); margin-top: 2px; }
+  .stats .cell { padding: 10px 2px; }
+  .stats .cell + .cell { border-left: 1px solid var(--separator); }
+  .stats .num { font-size: 18px; font-weight: 700; }
+  .stats .lbl { font-size: 10.5px; color: var(--secondary); margin-top: 1px; }
 
-  /* Section header */
-  .sec-head { font-size: 13px; font-weight: 400; color: var(--secondary); text-transform: uppercase; letter-spacing: .02em; padding: 24px 4px 8px; }
+  .sec-head { font-size: 12.5px; font-weight: 400; color: var(--secondary); text-transform: uppercase; letter-spacing: .02em; padding: 20px 4px 6px; }
 
-  /* Grouped list */
-  .list .row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; text-decoration: none; color: inherit; }
-  .list .row + .row { border-top: 1px solid rgba(60,60,67,.12); }
-  .list .row:active { background: #F2F2F7; }
-  .icon { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; color: #fff; }
+  /* grouped list */
+  .list .row { display: flex; align-items: center; gap: 11px; padding: 11px 14px; text-decoration: none; color: inherit; background: none; border: none; width: 100%; text-align: left; cursor: pointer; font-family: inherit; }
+  .list .row + .row { border-top: 1px solid var(--separator); }
+  .list button.row:active, .list a.row:active { background: var(--bg); }
+  .icon { width: 29px; height: 29px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; color: #fff; font-weight: 600; }
   .row .t { flex: 1; min-width: 0; }
-  .row .t .a { font-size: 17px; }
-  .row .t .b { font-size: 14px; color: var(--secondary); margin-top: 1px; line-height: 1.35; }
+  .row .t .a { font-size: 16.5px; }
+  .row .t .b { font-size: 13.5px; color: var(--secondary); margin-top: 1px; line-height: 1.35; }
   .row .chev { color: var(--tertiary); font-size: 18px; font-weight: 600; flex-shrink: 0; }
-  .badge { font-size: 13px; color: var(--secondary); background: #F2F2F7; padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
+  .badge { font-size: 12.5px; color: var(--secondary); background: var(--bg); padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
 
-  /* Featured project */
-  .feat { padding: 16px; }
-  .feat img { width: 100%; border-radius: 8px; display: block; }
-  .feat h3 { font-size: 20px; font-weight: 700; margin-top: 12px; letter-spacing: -0.01em; }
-  .feat p { font-size: 15px; color: var(--secondary); line-height: 1.45; margin-top: 4px; }
-  .feat .link { display: inline-block; margin-top: 10px; color: var(--blue); font-size: 15px; font-weight: 600; text-decoration: none; }
+  /* skills — collapsible, compact */
+  .skill-row .a { display: flex; align-items: center; gap: 8px; }
+  .skill-row .a .n { font-size: 12px; color: var(--blue); font-weight: 600; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .skill-row .chev { transition: transform .25s ease; }
+  .skill-row.open .chev { transform: rotate(90deg); }
+  .skill-body { padding: 0 14px 12px 14px; }
+  .skill-body[hidden] { display: none; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--separator); border-radius: 999px; padding: 5px 10px; font-size: 12.5px; font-weight: 500; color: var(--label); background: transparent; }
+  .pill.is-hot { background: var(--label); border-color: var(--label); color: var(--bg); font-weight: 600; }
+  .pill.is-hot::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); flex: none; }
+  .pill-new { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .04em; }
+  .skill-note { font-size: 13px; color: var(--secondary); margin-top: 8px; line-height: 1.4; }
 
-  /* Steps */
-  .step { display: flex; gap: 12px; padding: 14px 16px; }
-  .step + .step { border-top: 1px solid rgba(60,60,67,.12); }
-  .step .n { width: 26px; height: 26px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-  .step h4 { font-size: 17px; font-weight: 600; }
-  .step p { font-size: 14px; color: var(--secondary); line-height: 1.45; margin-top: 2px; }
+  /* steps */
+  .step { display: flex; gap: 11px; padding: 12px 14px; }
+  .step + .step { border-top: 1px solid var(--separator); }
+  .step .n { width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step h4 { font-size: 16px; font-weight: 600; }
+  .step p { font-size: 13.5px; color: var(--secondary); line-height: 1.4; margin-top: 1px; }
 
-  .foot { text-align: center; font-size: 13px; color: var(--tertiary); padding: 28px 16px 0; }
+  .foot { text-align: center; font-size: 12.5px; color: var(--tertiary); padding: 24px 16px 0; line-height: 1.6; }
   .foot a { color: var(--blue); text-decoration: none; }
+
+  /* ============ laptop stories — copied verbatim from the old portfolio (v20) ============ */
+  .stories-section { padding: 0; }
+  .vibe-stories-container { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); text-align: center; }
+  .laptop-wrapper { position: relative; width: 100%; }
+  .laptop-container {
+    position: relative; isolation: isolate;
+    width: 100%; max-width: 760px; margin: 0 auto;
+    aspect-ratio: 1400 / 813;
+  }
+  .laptop-frame {
+    position: relative; z-index: 10; width: 100%; height: auto;
+    display: block; object-fit: contain; pointer-events: none;
+    filter: drop-shadow(0 18px 22px rgba(32, 30, 25, .16)) drop-shadow(0 44px 80px rgba(32, 30, 25, .18));
+  }
+  .screen-content {
+    position: absolute; z-index: 1;
+    top: var(--screen-top); left: var(--screen-left);
+    width: var(--screen-width); height: var(--screen-height);
+    background: #0b0b0f; overflow: hidden;
+    transform: translateZ(0);
+  }
+  .screen-link { position: absolute; inset: 0; display: block; background: transparent; overflow: hidden; border-radius: inherit; }
+  .screen-link:focus, .screen-link:focus-visible { outline: none; }
+  .screen-image-wrapper { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; }
+  .screen-image {
+    position: absolute; inset: 0; display: block;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+  }
+  .slide-left-enter-active, .slide-left-leave-active,
+  .slide-right-enter-active, .slide-right-leave-active {
+    transition: transform .6s cubic-bezier(.25, 1, .5, 1);
+    will-change: transform;
+  }
+  .slide-left-enter-from { transform: translateX(100%); }
+  .slide-left-leave-to { transform: translateX(-100%); }
+  .slide-right-enter-from { transform: translateX(-100%); }
+  .slide-right-leave-to { transform: translateX(100%); }
+  .motion-off .slide-left-enter-active, .motion-off .slide-left-leave-active,
+  .motion-off .slide-right-enter-active, .motion-off .slide-right-leave-active { transition: none; }
+  .nav-btn {
+    position: absolute; top: 42%; transform: translateY(-50%); z-index: 20;
+    background: rgba(255, 255, 255, .95);
+    border: 1px solid rgba(32, 30, 25, .12);
+    border-radius: 50%; width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--ink);
+    transition: transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 4px 14px rgba(32, 30, 25, .2);
+  }
+  .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+  .nav-btn.prev { left: 4px; }
+  .nav-btn.next { right: 4px; }
+  .indicators { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; }
+  .indicator-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(32, 30, 25, .22); border: none; padding: 0; cursor: pointer;
+    transition: all .3s ease;
+  }
+  .indicator-dot:hover { background: rgba(32, 30, 25, .4); }
+  .indicator-dot.active { width: 26px; border-radius: 5px; background: var(--accent); }
+  html.dark .nav-btn { background: rgba(28, 28, 30, .95); border-color: rgba(255,255,255,.14); box-shadow: 0 4px 14px rgba(0,0,0,.5); }
+  html.dark .nav-btn:hover { background: #2C2C2E; }
+  html.dark .indicator-dot { background: rgba(255,255,255,.25); }
+  html.dark .indicator-dot:hover { background: rgba(255,255,255,.45); }
+
+  /* ============ category page (iOS push-style) ============ */
+  #catPage {
+    position: fixed; inset: 0; z-index: 50; overflow-y: auto;
+    background: var(--bg); transform: translateX(100%);
+    transition: transform .32s cubic-bezier(.32,.72,.35,1);
+    visibility: hidden;
+  }
+  #catPage.open { transform: translateX(0); visibility: visible; }
+  .cat-nav { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 14px 16px 10px; background: var(--bg); }
+  .cat-back { border: none; background: none; color: var(--blue); font-size: 17px; cursor: pointer; font-family: inherit; padding: 4px 0; }
+  .cat-body { max-width: 430px; margin: 0 auto; padding: 0 16px 48px; }
+  .cat-body h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; }
+  .cat-body .blurb { font-size: 15px; color: var(--secondary); margin-top: 4px; line-height: 1.4; }
+  .cat-proj { display: block; text-decoration: none; color: inherit; padding: 13px 14px; }
+  .cat-proj + .cat-proj { border-top: 1px solid var(--separator); }
+  .cat-proj:active { background: var(--bg); }
+  .cat-proj .a { font-size: 17px; font-weight: 600; }
+  .cat-proj .b { font-size: 14px; color: var(--secondary); margin-top: 2px; line-height: 1.4; }
+  .cat-proj .c { font-size: 12.5px; color: var(--tertiary); margin-top: 5px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .cat-proj .go { float: right; color: var(--tertiary); font-size: 17px; }
 </style>
 </head>
 <body>
-<div class="col">
+<div class="col" id="mainView">
+
+  <div class="topbar">
+    <div class="brand">Usf</div>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌙</button>
+  </div>
 
   <div class="nav">
-    <div class="eyebrow">PORTFOLIO</div>
     <h1>Usf</h1>
-    <div class="sub">A programer — software engineer &amp; system designer</div>
+    <div class="sub">Software engineer &amp; system designer</div>
   </div>
 
   <div class="card profile">
     <img class="avatar" src="assets/wolf.webp" alt="Usf — wolf mascot">
     <div>
       <div class="name">Usf</div>
-      <div class="role">Interested in learning — Software .eng &amp;&amp; System designer</div>
+      <div class="role">One engineer + an AI agent team</div>
       <div class="avail"><span class="dot"></span>Open to work — freelance &amp; full-time</div>
     </div>
-    <div class="chev">›</div>
   </div>
 
-  <div class="card" style="margin-top:12px">
+  <div class="card" style="margin-top:10px">
     <div class="stats">
       <div class="cell"><div class="num">30</div><div class="lbl">public repos</div></div>
       <div class="cell"><div class="num">17</div><div class="lbl">linked projects</div></div>
@@ -108,24 +224,121 @@
     </div>
   </div>
 
-  <div class="sec-head">Featured project</div>
-  <div class="card feat">
-    <img src="assets/stories/macbook-frame.webp" alt="VeilChat">
-    <h3>VeilChat</h3>
-    <p>Serverless P2P messenger with end-to-end encryption.</p>
-    <a class="link" href="https://github.com/Godde3s">View on GitHub ›</a>
+  <div class="sec-head">Featured — real projects, built in public</div>
+  <section class="stories-section" id="stories">
+    <div class="vibe-stories-container" id="vibeStories">
+      <div class="laptop-wrapper">
+        <div class="laptop-container">
+          <button class="nav-btn prev" type="button" aria-label="Previous story">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+          </button>
+          <button class="nav-btn next" type="button" aria-label="Next story">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+          </button>
+          <div class="screen-content" style="--screen-left:10%; --screen-top:1.5%; --screen-width:80%; --screen-height:87.5%">
+            <a href="https://github.com/Godde3s/veilchat" target="_blank" rel="noopener" class="screen-link">
+              <div class="screen-image-wrapper">
+                <img
+                  src="assets/stories/story-1.webp?v=20"
+                  srcset="assets/stories/story-1-640.webp?v=20 640w, assets/stories/story-1.webp?v=20 1280w"
+                  sizes="(max-width: 760px) 62vw, 440px"
+                  class="screen-image"
+                  style="object-position: center center"
+                  alt="VeilChat — serverless P2P messenger with end-to-end encryption"
+                  width="1280" height="959" loading="lazy" decoding="async" fetchpriority="low"
+                />
+              </div>
+            </a>
+          </div>
+          <img src="assets/stories/macbook-frame.webp" class="laptop-frame" alt="MacBook frame" width="1400" height="813" loading="lazy" decoding="async" fetchpriority="low" />
+        </div>
+        <div class="indicators">
+          <button class="indicator-dot active" type="button" aria-label="Select story"></button>
+          <button class="indicator-dot" type="button" aria-label="Select story"></button>
+          <button class="indicator-dot" type="button" aria-label="Select story"></button>
+          <button class="indicator-dot" type="button" aria-label="Select story"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec-head">Browse by category</div>
+  <div class="card list" id="catList">
+    <button class="row" type="button" data-cat="network"><div class="icon" style="background:#30B0C7">⌁</div><div class="t"><div class="a">Network</div><div class="b">Tunnels, edge &amp; realtime systems</div></div><span class="badge">3</span><div class="chev">›</div></button>
+    <button class="row" type="button" data-cat="mobile"><div class="icon" style="background:#007AFF">▣</div><div class="t"><div class="a">Mobile</div><div class="b">Native-feel apps from one codebase</div></div><span class="badge">2</span><div class="chev">›</div></button>
+    <button class="row" type="button" data-cat="desktop"><div class="icon" style="background:#5856D6">⌘</div><div class="t"><div class="a">Desktop</div><div class="b">Desktop, IoT &amp; industrial</div></div><span class="badge">1</span><div class="chev">›</div></button>
+    <button class="row" type="button" data-cat="fullstack"><div class="icon" style="background:#34C759">▦</div><div class="t"><div class="a">Full-Stack</div><div class="b">Complete products, front to back</div></div><span class="badge">2</span><div class="chev">›</div></button>
+    <button class="row" type="button" data-cat="backend"><div class="icon" style="background:#FF9500">{ }</div><div class="t"><div class="a">Back-End</div><div class="b">APIs, gateways &amp; AI infrastructure</div></div><span class="badge">7</span><div class="chev">›</div></button>
+    <button class="row" type="button" data-cat="frontend"><div class="icon" style="background:#AF52DE">◐</div><div class="t"><div class="a">Front-End</div><div class="b">Screens that feel designed</div></div><span class="badge">2</span><div class="chev">›</div></button>
   </div>
 
   <div class="sec-head">What I do</div>
-  <div class="card list">
-    <div class="row"><div class="icon" style="background:#AF52DE">✦</div><div class="t"><div class="a">AI-augmented workflow</div><div class="b">One engineer + an agent team — Claude Code, Hermes, OpenCode, RAG, Codex</div></div><div class="chev">›</div></div>
-    <div class="row"><div class="icon" style="background:#007AFF">◐</div><div class="t"><div class="a">Frontend &amp; UI/UX</div><div class="b">React, Next.js, React Native, Expo — screens that feel designed</div></div><div class="chev">›</div></div>
-    <div class="row"><div class="icon" style="background:#34C759">{ }</div><div class="t"><div class="a">Backend &amp; APIs</div><div class="b">Python FastAPI, Node.js, Go, .NET — runtime first, frameworks second</div></div><div class="chev">›</div></div>
-    <div class="row"><div class="icon" style="background:#FF9500">▦</div><div class="t"><div class="a">Databases &amp; data</div><div class="b">PostgreSQL, MySQL, SQLite, MongoDB — modeled to last</div></div><div class="chev">›</div></div>
-    <div class="row"><div class="icon" style="background:#5856D6">⌘</div><div class="t"><div class="a">System design</div><div class="b">End-to-end design, clean architecture, caching &amp; performance</div></div><div class="chev">›</div></div>
-    <div class="row"><div class="icon" style="background:#FF2D55">⌁</div><div class="t"><div class="a">Desktop, IoT &amp; industrial</div><div class="b">Tauri, Electron, PLC, Modbus TCP, SCADA — beyond the browser</div></div><div class="chev">›</div></div>
-    <div class="row"><div class="icon" style="background:#5AC8FA">⬢</div><div class="t"><div class="a">DevOps, cloud &amp; tools</div><div class="b">Docker, CI/CD, AWS, Cloudflare, Vercel — ships and stays shipped</div></div><div class="chev">›</div></div>
-    <div class="row"><div class="icon" style="background:#8E8E93">↗</div><div class="t"><div class="a">Learning now</div><div class="b">Astro on Cloudflare Workers — always mid-climb</div></div><span class="badge">now</span></div>
+  <div class="card list" id="skillList">
+    <div class="skill-row">
+      <button class="row" type="button" aria-expanded="false"><div class="t"><div class="a"><span class="n">01</span>&nbsp; AI-augmented workflow</div><div class="b">One engineer + an agent team</div></div><div class="chev">›</div></button>
+      <div class="skill-body" hidden>
+        <div class="pills">
+          <span class="pill is-hot">Claude Code</span><span class="pill is-hot">Hermes agent</span><span class="pill is-hot">OpenCode</span><span class="pill is-hot">Custom AI agents for organizations</span><span class="pill is-hot">RAG — private data pipelines</span><span class="pill">Codex CLI</span><span class="pill">Agent-team orchestration</span><span class="pill">Human-reviewed diffs</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <button class="row" type="button" aria-expanded="false"><div class="t"><div class="a"><span class="n">02</span>&nbsp; Frontend &amp; UI/UX</div><div class="b">Screens that feel designed</div></div><div class="chev">›</div></button>
+      <div class="skill-body" hidden>
+        <div class="pills">
+          <span class="pill is-hot">React &amp; Next.js</span><span class="pill is-hot">JavaScript - TypeScript</span><span class="pill is-hot">React Native - Expo</span><span class="pill is-hot">HTML &amp; CSS — RTL-first</span><span class="pill is-hot">WordPress - themes &amp; plugins</span><span class="pill is-hot">Responsive &amp; accessible</span><span class="pill">Tailwind - VitePress</span><span class="pill">Figma &amp; UI/UX design <span class="pill-new">new</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <button class="row" type="button" aria-expanded="false"><div class="t"><div class="a"><span class="n">03</span>&nbsp; Backend &amp; APIs</div><div class="b">Runtime first — frameworks second</div></div><div class="chev">›</div></button>
+      <div class="skill-body" hidden>
+        <div class="pills">
+          <span class="pill is-hot">Python — FastAPI + Flask + REST APIs</span><span class="pill is-hot">Node.js — Express + TypeScript</span><span class="pill is-hot">Go — net/http + single-binary APIs</span><span class="pill is-hot">C# — .NET + Modbus TCP</span><span class="pill">JWT auth &amp; security</span><span class="pill">E2E encryption</span><span class="pill">OpenAI-compatible APIs</span><span class="pill">LLM infra — routing, agents, SSE</span>
+        </div>
+        <div class="skill-note">More API tech: REST - GraphQL - gRPC - WebSockets - OpenAPI specs</div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <button class="row" type="button" aria-expanded="false"><div class="t"><div class="a"><span class="n">04</span>&nbsp; Databases &amp; data</div><div class="b">Modeled to last</div></div><div class="chev">›</div></button>
+      <div class="skill-body" hidden>
+        <div class="pills">
+          <span class="pill is-hot">SQL &amp; query design</span><span class="pill is-hot">PostgreSQL - MySQL - SQLite</span><span class="pill is-hot">NoSQL - MongoDB &amp; key-value stores</span><span class="pill is-hot">ORMs — SQLAlchemy &amp; EF Core</span><span class="pill is-hot">Data modeling &amp; migrations</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <button class="row" type="button" aria-expanded="false"><div class="t"><div class="a"><span class="n">05</span>&nbsp; System design</div><div class="b">From idea to blueprint</div></div><div class="chev">›</div></button>
+      <div class="skill-body" hidden>
+        <div class="pills">
+          <span class="pill is-hot">End-to-end system design</span><span class="pill">Clean &amp; layered architecture</span><span class="pill">Design patterns</span><span class="pill">Caching &amp; performance</span><span class="pill">Scalable service design</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <button class="row" type="button" aria-expanded="false"><div class="t"><div class="a"><span class="n">06</span>&nbsp; Desktop, IoT &amp; industrial</div><div class="b">Beyond the browser</div></div><div class="chev">›</div></button>
+      <div class="skill-body" hidden>
+        <div class="pills">
+          <span class="pill is-hot">Tauri &amp; Electron apps</span><span class="pill is-hot">PLC — LD &amp; ST (IEC 61131-3)</span><span class="pill">Modbus TCP - SCADA</span><span class="pill">IoT &amp; device bridges</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <button class="row" type="button" aria-expanded="false"><div class="t"><div class="a"><span class="n">07</span>&nbsp; DevOps, cloud &amp; tools</div><div class="b">Ships and stays shipped</div></div><div class="chev">›</div></button>
+      <div class="skill-body" hidden>
+        <div class="pills">
+          <span class="pill is-hot">Docker &amp; CI/CD</span><span class="pill is-hot">AWS</span><span class="pill">Cloudflare Workers &amp; Pages</span><span class="pill">Vercel</span><span class="pill">Railway - Render - Fly.io - Koyeb</span><span class="pill is-hot">Git &amp; GitHub workflows</span><span class="pill">pytest - Postman - Newman</span><span class="pill">Networking — TCP/IP, tunnels, edge</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <button class="row" type="button" aria-expanded="false"><div class="t"><div class="a"><span class="n">08</span>&nbsp; Learning now</div><div class="b">Always mid-climb</div></div><div class="chev">›</div></button>
+      <div class="skill-body" hidden>
+        <div class="pills">
+          <span class="pill">Emdash <span class="pill-new">learning</span></span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="sec-head">How we work together</div>
@@ -140,8 +353,336 @@
     <a class="row" href="https://github.com/Godde3s"><div class="icon" style="background:#000">⌥</div><div class="t"><div class="a">All repositories</div><div class="b">github.com/Godde3s — 30 public repos</div></div><div class="chev">›</div></a>
   </div>
 
-  <div class="foot">Usf — A programer · <a href="https://godde3s.github.io/">godde3s.github.io</a><br>iOS-style preview — not live yet</div>
-
+  <div class="foot">Usf — A programer · <a href="https://godde3s.github.io/">godde3s.github.io</a><br>© <span id="year">2026</span> Usf (Godde3s)</div>
 </div>
+
+<!-- category detail page -->
+<div id="catPage" aria-hidden="true">
+  <div class="cat-nav"><button class="cat-back" id="catBack" type="button">‹ Categories</button></div>
+  <div class="cat-body">
+    <h1 id="catTitle"></h1>
+    <p class="blurb" id="catBlurb"></p>
+    <div class="sec-head">Projects</div>
+    <div class="card" id="catProjects"></div>
+    <div class="sec-head">Technologies I use here</div>
+    <div class="card" style="padding:12px 14px"><div class="pills" id="catTech"></div></div>
+  </div>
+</div>
+
+<script>
+/* ================= dark mode ================= */
+(function () {
+  var root = document.documentElement;
+  var KEY = 'usf-theme';
+  var btn = document.getElementById('themeBtn');
+  function stored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function apply(mode) {
+    var dark = mode === 'dark';
+    root.classList.toggle('dark', dark);
+    if (btn) btn.textContent = dark ? '☀️' : '🌙';
+  }
+  var initial = stored();
+  if (!initial) initial = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  apply(initial);
+  if (btn) btn.addEventListener('click', function () {
+    var next = root.classList.contains('dark') ? 'light' : 'dark';
+    try { localStorage.setItem(KEY, next); } catch (e) {}
+    apply(next);
+  });
+})();
+
+/* ================= year ================= */
+(function () {
+  var y = document.getElementById('year');
+  if (y) y.textContent = String(new Date().getFullYear());
+})();
+
+/* ================= skills accordion ================= */
+(function () {
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#skillList .skill-row'));
+  rows.forEach(function (row) {
+    var btn = row.querySelector('button.row');
+    var body = row.querySelector('.skill-body');
+    btn.addEventListener('click', function () {
+      var open = row.classList.toggle('open');
+      body.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+})();
+
+/* ================= category pages ================= */
+var CATS = {
+  network: {
+    name: 'Network', blurb: 'Networking, tunnels & realtime systems.',
+    tech: ['Go', 'TCP/IP', 'Tunnels', 'WebSockets', 'E2E encryption', 'P2P', 'Edge', 'Self-host'],
+    projects: [
+      { name: 'NetPilot', desc: 'Network autopilot — single-binary edge tooling & tunnels', tags: 'Go - Tunnels - Edge', href: 'https://github.com/Godde3s/netpilot' },
+      { name: 'VeilChat', desc: 'End-to-end encrypted realtime chat, self-hostable', tags: 'Python - E2E encryption - WebSockets', href: 'https://github.com/Godde3s/veilchat' },
+      { name: 'Goftego', desc: 'Realtime chat rooms you self-host in one command', tags: 'JavaScript - Realtime - Self-host', href: 'https://github.com/Godde3s/goftego' }
+    ]
+  },
+  mobile: {
+    name: 'Mobile', blurb: 'Native-feel apps from one codebase.',
+    tech: ['React Native', 'Expo', 'iOS', 'Android', 'Streaming', 'Cross-platform'],
+    projects: [
+      { name: 'Peregrine', desc: 'Streaming AI console for iOS & Android, built to a native design bar', tags: 'React Native - Expo - Streaming', href: 'https://github.com/Godde3s/peregrine' },
+      { name: 'HabitGrid', desc: 'Cross-platform habit tracker from one Expo codebase', tags: 'React Native - Expo - Cross-platform', href: 'https://github.com/Godde3s/habitgrid' }
+    ]
+  },
+  desktop: {
+    name: 'Desktop', blurb: 'Desktop, IoT & industrial — beyond the browser.',
+    tech: ['Tauri', 'Electron', 'C#', '.NET', 'PLC', 'Modbus TCP', 'SCADA', 'IoT'],
+    projects: [
+      { name: 'ModbusLite', desc: 'Lightweight Modbus TCP library for industrial links', tags: 'C# - Modbus TCP - Industrial', href: 'https://github.com/Godde3s/modbuslite' }
+    ]
+  },
+  fullstack: {
+    name: 'Full-Stack', blurb: 'Complete products, front to back.',
+    tech: ['TypeScript', 'PHP', 'WordPress', 'HTML', 'CSS', 'Vanilla JS', 'REST APIs'],
+    projects: [
+      { name: 'Snaplink', desc: 'Fast link tooling with a clean API surface', tags: 'TypeScript - API design', href: 'https://github.com/Godde3s/snaplink' },
+      { name: 'Usf Resume', desc: 'WordPress résumé/CV plugin — settings page, shortcode, schema.org JSON-LD', tags: 'PHP - WordPress - Shortcodes', href: 'https://github.com/Godde3s/usf-resume' }
+    ]
+  },
+  backend: {
+    name: 'Back-End', blurb: 'APIs, gateways & AI infrastructure.',
+    tech: ['Python', 'FastAPI', 'Go', 'REST', 'GraphQL', 'gRPC', 'JWT auth', 'LLM routing', 'SSE'],
+    projects: [
+      { name: 'TaskFlow API', desc: 'Production FastAPI backend — every security claim backed by a test', tags: 'Python - FastAPI - Auth', href: 'https://github.com/Godde3s/taskflow-api' },
+      { name: 'OmniRouter', desc: 'One OpenAI-compatible API in front of many models', tags: 'Go - OpenAI-compatible - Routing', href: 'https://github.com/Godde3s/omnirouter' },
+      { name: 'GLM Free API', desc: 'OpenAI-compatible bridge for GLM models', tags: 'Go - REST - Bridge', href: 'https://github.com/Godde3s/glm-free-api' },
+      { name: 'Postman Toolkit', desc: 'Layered API contract testing for Postman & Newman', tags: 'Postman - Newman - Contracts', href: 'https://github.com/Godde3s/postman-api-testing-toolkit' },
+      { name: 'Hermes Stack', desc: 'AI server that routes models, schedules jobs & automations', tags: 'Python - LLM routing - Jobs', href: 'https://github.com/Godde3s/hermes-stack' },
+      { name: 'TextSense', desc: 'NLP service for text analysis and classification', tags: 'Python - NLP - Classification', href: 'https://github.com/Godde3s/textsense' },
+      { name: 'BaleForge', desc: 'Automation toolkit for the Bale messenger platform', tags: 'Python - Bots - Automation', href: 'https://github.com/Godde3s/baleforge' }
+    ]
+  },
+  frontend: {
+    name: 'Front-End', blurb: 'Screens that feel designed.',
+    tech: ['React', 'Next.js', 'JavaScript', 'TypeScript', 'HTML & CSS', 'RTL-first', 'Tailwind', 'Figma'],
+    projects: [
+      { name: 'This Portfolio', desc: 'The site you are on — hand-rolled HTML, CSS & vanilla JS, zero templates', tags: 'HTML - CSS - Vanilla JS', href: 'https://github.com/Godde3s/godde3s.github.io' },
+      { name: 'fa-guides', desc: 'Persian RTL interactive guides with a built-in self-quiz — no framework', tags: 'HTML - RTL - Interactive', href: 'https://github.com/Godde3s/fa-guides' }
+    ]
+  }
+};
+(function () {
+  var page = document.getElementById('catPage');
+  var titleEl = document.getElementById('catTitle');
+  var blurbEl = document.getElementById('catBlurb');
+  var projEl = document.getElementById('catProjects');
+  var techEl = document.getElementById('catTech');
+
+  function render(key) {
+    var c = CATS[key];
+    if (!c) return false;
+    titleEl.textContent = c.name;
+    blurbEl.textContent = c.blurb;
+    projEl.innerHTML = c.projects.map(function (p) {
+      return '<a class="cat-proj" href="' + p.href + '" target="_blank" rel="noopener"><span class="go">›</span><div class="a">' + p.name + '</div><div class="b">' + p.desc + '</div><div class="c">' + p.tags + '</div></a>';
+    }).join('');
+    techEl.innerHTML = c.tech.map(function (t) { return '<span class="pill">' + t + '</span>'; }).join('');
+    return true;
+  }
+  function show(key) {
+    if (!render(key)) return;
+    page.classList.add('open');
+    page.setAttribute('aria-hidden', 'false');
+    page.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+  function hide() {
+    page.classList.remove('open');
+    page.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function syncHash() {
+    var m = location.hash.match(/^#cat\/([a-z]+)$/);
+    if (m) show(m[1]); else hide();
+  }
+  document.querySelectorAll('#catList [data-cat]').forEach(function (btn) {
+    btn.addEventListener('click', function () { location.hash = 'cat/' + btn.getAttribute('data-cat'); });
+  });
+  document.getElementById('catBack').addEventListener('click', function () { location.hash = ''; });
+  window.addEventListener('hashchange', syncHash);
+  syncHash();
+})();
+
+/* ================= laptop stories slider — copied verbatim from the old portfolio (v17) ================= */
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var container = document.getElementById('vibeStories');
+  if (!container) return;
+
+  var STORIES = [
+    {
+      image: 'assets/stories/story-1.webp?v=20',
+      srcset: 'assets/stories/story-1-640.webp?v=20 640w, assets/stories/story-1.webp?v=20 1280w',
+      imageHeight: 959,
+      objectPosition: 'center center',
+      link: 'https://github.com/Godde3s/veilchat',
+      alt: 'VeilChat — serverless P2P messenger with end-to-end encryption'
+    },
+    {
+      image: 'assets/stories/story-2.webp?v=20',
+      srcset: 'assets/stories/story-2-640.webp?v=20 640w, assets/stories/story-2.webp?v=20 1280w',
+      imageHeight: 959,
+      objectPosition: 'center center',
+      link: 'https://github.com/Godde3s/whisker',
+      alt: 'Whisker — self-hosted customer conversations platform, Persian/RTL-first, maintained by Usf'
+    },
+    {
+      image: 'assets/stories/story-3.webp?v=20',
+      srcset: 'assets/stories/story-3-640.webp?v=20 640w, assets/stories/story-3.webp?v=20 1280w',
+      imageHeight: 959,
+      objectPosition: 'center center',
+      link: 'https://github.com/Godde3s/goftego',
+      alt: 'Goftego — self-hosted realtime chat rooms with WebSocket fan-out and JWT auth'
+    },
+    {
+      image: 'assets/stories/story-4.webp?v=20',
+      srcset: 'assets/stories/story-4-640.webp?v=20 640w, assets/stories/story-4.webp?v=20 1280w',
+      imageHeight: 959,
+      objectPosition: 'center center',
+      link: 'https://github.com/Godde3s/anti-treason-bot',
+      alt: 'Anti-Treason Bot — Telegram anti-cheat guard on Cloudflare Workers with 352 tests'
+    }
+  ];
+
+  var AUTOPLAY_MS = 4000;
+  var PAGINATE_LOCK_MS = 800;
+  var TRANSITION_MS = 600;
+
+  var screenLink = container.querySelector('.screen-link');
+  var dots = Array.prototype.slice.call(container.querySelectorAll('.indicator-dot'));
+  var wrapperEl = container.querySelector('.laptop-wrapper');
+
+  var currentIndex = 0;
+  var isPaginating = false;
+  var autoplayTimer = null;
+  var wantAutoplay = true;
+
+  function story(i) { return STORIES[i] || STORIES[0]; }
+
+  function syncInfo() {
+    var s = story(currentIndex);
+    if (screenLink) screenLink.href = s.link;
+    dots.forEach(function (dot, i) { dot.classList.toggle('active', i === currentIndex); });
+  }
+
+  function mountImage(s) {
+    var wrap = document.createElement('div');
+    wrap.className = 'screen-image-wrapper';
+    var img = document.createElement('img');
+    img.className = 'screen-image';
+    img.src = s.image;
+    img.srcset = s.srcset;
+    img.sizes = '(max-width: 760px) 62vw, 440px';
+    img.alt = s.alt || 'Story cover';
+    img.width = 1280;
+    img.height = s.imageHeight;
+    img.style.objectPosition = s.objectPosition;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.setAttribute('fetchpriority', 'low');
+    wrap.appendChild(img);
+    return wrap;
+  }
+
+  function slideTo(index, name) {
+    var enter = mountImage(story(index));
+    screenLink.appendChild(enter);
+
+    var leaving = [];
+    Array.prototype.forEach.call(screenLink.querySelectorAll('.screen-image-wrapper'), function (el) {
+      if (el !== enter) leaving.push(el);
+    });
+
+    enter.classList.add(name + '-enter-active', name + '-enter-from');
+    leaving.forEach(function (el) { el.classList.add(name + '-leave-active'); });
+    void enter.offsetWidth;
+    enter.classList.remove(name + '-enter-from');
+    leaving.forEach(function (el) { el.classList.add(name + '-leave-to'); });
+
+    window.setTimeout(function () {
+      enter.classList.remove(name + '-enter-active');
+      leaving.forEach(function (el) { if (el.parentNode) el.parentNode.removeChild(el); });
+    }, TRANSITION_MS);
+  }
+
+  function go(delta) {
+    if (isPaginating) return;
+    isPaginating = true;
+    var idx = (currentIndex + delta + STORIES.length) % STORIES.length;
+    slideTo(idx, delta > 0 ? 'slide-left' : 'slide-right');
+    currentIndex = idx;
+    syncInfo();
+    window.setTimeout(function () { isPaginating = false; }, PAGINATE_LOCK_MS);
+  }
+
+  function setIndex(index) {
+    if (index === currentIndex || isPaginating) return;
+    slideTo(index, index > currentIndex ? 'slide-left' : 'slide-right');
+    currentIndex = index;
+    syncInfo();
+  }
+
+  function startAutoplay() {
+    if (!wantAutoplay) return;
+    stopAutoplay();
+    autoplayTimer = window.setInterval(function () {
+      if (!isPaginating) go(1);
+    }, AUTOPLAY_MS);
+  }
+  function stopAutoplay() {
+    if (autoplayTimer) { window.clearInterval(autoplayTimer); autoplayTimer = null; }
+  }
+
+  window.orStoriesAuto = function (on) { wantAutoplay = on; if (on) startAutoplay(); else stopAutoplay(); };
+
+  var prevBtn = container.querySelector('.nav-btn.prev');
+  var nextBtn = container.querySelector('.nav-btn.next');
+  if (prevBtn) prevBtn.addEventListener('click', function () { go(-1); stopAutoplay(); startAutoplay(); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { go(1); stopAutoplay(); startAutoplay(); });
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () { setIndex(i); stopAutoplay(); startAutoplay(); });
+  });
+
+  if (wrapperEl) {
+    wrapperEl.addEventListener('mouseenter', stopAutoplay);
+    wrapperEl.addEventListener('mouseleave', startAutoplay);
+  }
+
+  container.addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaX) > 20 && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.preventDefault();
+      go(e.deltaX > 0 ? 1 : -1);
+    }
+  }, { passive: false });
+
+  var touchX = 0, touchY = 0, touchT = 0;
+  container.addEventListener('touchstart', function (e) {
+    if (!e.touches.length) return;
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+    touchT = Date.now();
+  }, { passive: true });
+  container.addEventListener('touchend', function (e) {
+    if (!e.changedTouches.length) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    var dy = e.changedTouches[0].clientY - touchY;
+    if (Date.now() - touchT > 800) return;
+    if (Math.abs(dx) < 44 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+    go(dx < 0 ? 1 : -1);
+    stopAutoplay(); startAutoplay();
+  }, { passive: true });
+
+  wantAutoplay = !root.classList.contains('motion-off');
+  syncInfo();
+  if (wantAutoplay) startAutoplay();
+})();
+</script>
 </body>
 </html>
