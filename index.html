@@ -42,6 +42,8 @@
   .col { max-width: 430px; margin: 0 auto; padding: 0 16px 40px; }
 
   /* compact profile */
+  .nav { padding: 36px 4px 0; }
+  .nav h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
   .card { background: var(--card); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(0,0,0,.06); overflow: hidden; margin-top: 12px; transition: background .25s ease; }
   .profile { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
   .avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; background: #E5E5EA; flex-shrink: 0; }
@@ -185,10 +187,13 @@
 <body>
 <div class="col" id="mainView">
 
+  <div class="nav">
+    <h1>Software engineer &amp; system designer</h1>
+  </div>
+
   <div class="card profile" style="margin-top:20px">
     <div class="avatar avatar-text" aria-label="Usf">Usf</div>
     <div>
-      <div class="name">Software engineer &amp; system designer</div>
       <div class="role">One engineer + an AI agent team</div>
     </div>
   </div>
